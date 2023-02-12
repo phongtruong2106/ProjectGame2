@@ -14,6 +14,7 @@ public class Entity : MonoBehaviour
    public Animator anim {get; private set; }
    public GameObject aliveGO {get; private set;}
    public AnimationToStateMachine atsm {get; private set;}
+   public int lastDamageDirection{get; private set;}
 
    [SerializeField]
    private Transform wallCheck;
@@ -21,17 +22,22 @@ public class Entity : MonoBehaviour
    private  Transform ledgeCheck;
    [SerializeField]
    private Transform playerCheck;
+   [SerializeField]
+   private Transform groundCheck; //kiem tra mat dat
 
    private float currentHealth;
-
-   private int lastDamageDirection;
+   private float currentStunResistance;
+   private float lastDamageTime;
    private Vector2 velocityWorkspace;
+
+   protected bool isStunned;
 
    //tat ca nhung enemy co the override lai 
    public virtual void Start()
    {
         facingDirection = 1;
         currentHealth = entityData.maxHealth;
+        currentStunResistance = entityData.stunResistance; // kha nag chong choang 
 
         aliveGO  = transform.Find("Alive").gameObject;
         rb = aliveGO.GetComponent<Rigidbody2D>();
@@ -44,12 +50,23 @@ public class Entity : MonoBehaviour
    public virtual void Update()
    {
        stateMachine.currentState.LogicUpdate();
+       if(Time.time >= lastDamageTime + entityData.stunRecoveryTime)
+       {
+            ResetStunResistance();
+       }
       
    }
 
    public virtual void FixedUpdate()
    {
        stateMachine.currentState.PhysicsUpdate();
+   }
+
+   public virtual void SetVelocity(float velocity, Vector2 angle, int direction)
+   {
+      angle.Normalize();
+      velocityWorkspace.Set(angle.x * velocity * direction, angle.y * velocity);
+      rb.velocity = velocityWorkspace;
    }
 
    public virtual void SetVelocity(float velocity)
@@ -69,6 +86,10 @@ public class Entity : MonoBehaviour
          return Physics2D.Raycast(ledgeCheck.position, Vector2.down, entityData.ledgeCheckDistance, entityData.whatIsGround);
    }
 
+   public virtual bool CheckGround()
+   {
+         return Physics2D.OverlapCircle(groundCheck.position, entityData.groundCheckRadius , entityData.whatIsGround);
+   }
 
 //tao ham phat hien player , cach hoat dong giong nhu Checkwall va checkLedge
    public virtual bool checkPlayerInMinAgroRange(){
@@ -90,10 +111,20 @@ public class Entity : MonoBehaviour
        rb.velocity = velocityWorkspace;
    }
    
+   public virtual void ResetStunResistance()
+   {
+      //tro lai trang thai choang
+      isStunned = false;
+      currentStunResistance = entityData.stunResistance;
+   }
+
    //thiet hai(damage)
    public virtual void Damage(AttackDetails attackDetails)
    {
+            lastDamageTime = Time.time;
+
             currentHealth -= attackDetails.damageAmount; //enemy bi day lui va bi gay sat thuong
+            currentStunResistance -= attackDetails.stunDamageAmount;
 
             DamageHop(entityData.damageHopSpeed);
 
@@ -104,6 +135,10 @@ public class Entity : MonoBehaviour
             else
             {
                   lastDamageDirection = 1;
+            }
+            if(currentStunResistance <= 0)
+            {
+                  isStunned = true;
             }
    }
    public virtual void Flip()

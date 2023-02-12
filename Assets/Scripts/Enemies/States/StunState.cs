@@ -6,6 +6,10 @@ public class StunState : State
 {
     protected D_StunState stateData;
     protected bool isStunTimeOver; //dung choang
+    protected bool isGrounded;
+    protected bool isMovementStopted;
+    protected bool performCloseRangeAction;
+    protected bool isPlayerInMinAgroRange;
     public StunState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, D_StunState stateData) : base(entity, stateMachine, animBoolName)
     {
         //gan du lieu trang thai
@@ -15,17 +19,24 @@ public class StunState : State
     public override void DoChecks()
     {
         base.DoChecks();
+
+        isGrounded = entity.CheckGround();
+        performCloseRangeAction = entity.CheckPlayerInCloseRangeAction(); //check Player trong vung Phat hien
+        isPlayerInMinAgroRange = entity.checkPlayerInMinAgroRange();
     }
 
     public override void Enter()
     {
         base.Enter();
         isStunTimeOver = false; //ngay luc nay se khong bi choang => viec choang se bi tam hoan
+        isMovementStopted = false; //khi bat dau thi se duy chuyen binh thuong => tai day bien nay se de la false
+        entity.SetVelocity(stateData.stunKnockSpeed, stateData.stunKnockbackAngle, entity.lastDamageDirection);
     }
 
     public override void Exit()
     {
         base.Exit();
+        entity.ResetStunResistance();
     }
 
     public override void LogicUpdate()
@@ -34,6 +45,13 @@ public class StunState : State
         if(Time.time >= startTime +  stateData.stunTime)
         {
             isStunTimeOver = true;
+        }
+
+        if(isGrounded && Time.time >= startTime + stateData.stunKnockbackTime && !isMovementStopted)
+        {
+            isMovementStopted = true; 
+            entity.SetVelocity(0f);
+
         }
     }
 
