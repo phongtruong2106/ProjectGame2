@@ -11,6 +11,7 @@ public class Enemy1 : Entity //quy dinh Enemy1 la mot entity
     public E1_LookForPlayer lookForPlayerState {get; private set;}
 
     public E1_MeleeAttackState meleeAttackState{get; private set;}
+    public E1_StunState stunState{get; private set;}
 
     [SerializeField]
     private D_IdieState idieStateData;
