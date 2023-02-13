@@ -9,6 +9,8 @@ public class PlayerCombatControler : MonoBehaviour
     [SerializeField]
     private float inputTimer, attack1Radius, attack1Damage;
     [SerializeField]
+    private float stunDamageAmount = 1f;
+    [SerializeField]
     private Transform attack1HitBoxPos;
     //nhan biet doi tuong nao that su can phat hien
     [SerializeField]
@@ -77,6 +79,8 @@ public class PlayerCombatControler : MonoBehaviour
 
         attackDetails.damageAmount = attack1Damage; //tan cong 1 
         attackDetails.position =transform.position;//tan cong vi tri x
+        //check funtion attack hit box
+        attackDetails.stunDamageAmount = stunDamageAmount;
 
         foreach (Collider2D collider in detectedObjects)
         {

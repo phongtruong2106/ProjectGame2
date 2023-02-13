@@ -25,6 +25,8 @@ public class Enemy1 : Entity //quy dinh Enemy1 la mot entity
     private D_LookForPlayer lookForPlayerData;
     [SerializeField] 
     private D_MeleeAttack meleeAttackStateData;
+    [SerializeField]
+    private D_StunState stunStateData;
 
     [SerializeField]
     private Transform meleeAttackPosition;
@@ -39,6 +41,7 @@ public class Enemy1 : Entity //quy dinh Enemy1 la mot entity
         chargeState = new E1_ChangeState(this, stateMachine, "charge", chargeStateData, this); 
         lookForPlayerState = new E1_LookForPlayer(this, stateMachine, "lookForPlayer", lookForPlayerData, this);
         meleeAttackState = new E1_MeleeAttackState(this, stateMachine, "meleeAttack",meleeAttackPosition, meleeAttackStateData,this);
+        stunState = new E1_StunState(this, stateMachine, "stun", stunStateData, this);
 
         stateMachine.Initialize(moveState);
     }
@@ -48,5 +51,15 @@ public class Enemy1 : Entity //quy dinh Enemy1 la mot entity
         base.OnDrawGizmos();
 
         Gizmos.DrawWireSphere(meleeAttackPosition.position, meleeAttackStateData.attackRadius);
+    }  
+
+    public override void Damage(AttackDetails attackDetails)
+    {
+        base.Damage(attackDetails);
+
+        if(isStunned && stateMachine.currentState != stunState)
+        {
+            stateMachine.ChangeState(stunState);
+        }
     }
 }
