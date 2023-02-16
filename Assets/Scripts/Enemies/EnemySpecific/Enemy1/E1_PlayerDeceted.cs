@@ -35,6 +35,13 @@ public class E1_PlayerDeceted : PlayerDecetedState
         else if(!isPlayerInMaxArgnRange)
         {
             stateMachine.ChangeState(enemy1.lookForPlayerState); //phat hien nguoi choi
+        } //phat hien legde sao do cham thuc the khac khi dang phat hien 
+        else if(!isDetectingLedge)
+        {
+            entity.Flip(); // khi phat hien thi quay nguoc 
+            //khi phat hien ledge chuyen sang doi trang thai duy chuyen
+            stateMachine.ChangeState(enemy1.moveState);
+
         }
         
     }

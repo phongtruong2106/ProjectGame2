@@ -52,10 +52,10 @@ public class CombatDummyController : MonoBehaviour
     }
 
     //nhan damage
-    private void Damage(float[] details){
-            currentHealth -= details[0];
+    private void Damage(AttackDetails details){
+            currentHealth -= details.damageAmount;
             
-            if(details[1] < aliveGO.transform.position.x){
+            if(details.position.x < aliveGO.transform.position.x){
                 playerFacingDirection = 1;
             }
             else
