@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ecba903651727a46b1394928f903561, type: 3}
-  m_Name: E2_IdleStateData
+  m_Script: {fileID: 11500000, guid: 8d7e72b012dbb4247b37520518d804ca, type: 3}
+  m_Name: E2_MeleeAttackStateData
   m_EditorClassIdentifier: 
-  minIdleTime: 1
-  maxIdleTime: 1
+  attackRadius: 0.14
+  attackDamage: 10
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 2048

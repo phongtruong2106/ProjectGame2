@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   damageHopSpeed: 5
-  wallCheckDistance: 0.2
-  ledgeCheckDistance: 0.16
+  wallCheckDistance: 0.29
+  ledgeCheckDistance: 0.32
   groundCheckRadius: 0.3
   maxArgoDistance: 1.22
   minArgoDistance: 0.56

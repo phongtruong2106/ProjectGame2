@@ -28,9 +28,12 @@ public class E2_MoveState : MoveState
     {
         base.LogicUpdate();
 
-
-        //TODO: transition to PlayerDetectedState
-        if(isDetectingWall || !isDetectingLedge)
+        if(isPlayerInMinArgoRange)
+        {
+            stateMachine.ChangeState(enemy.playerDetectedState);
+        }
+    
+        else if(isDetectingWall || !isDetectingLedge)
         {
             enemy.idieState.SetFlipAfterIdle(true);
             stateMachine.ChangeState(enemy.idieState);
