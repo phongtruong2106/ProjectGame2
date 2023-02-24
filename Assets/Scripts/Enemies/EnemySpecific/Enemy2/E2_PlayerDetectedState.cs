@@ -32,7 +32,15 @@ public class E2_PlayerDetectedState : PlayerDecetedState
         //neu hanh dong ram gan thi trang thai doi sang thanh trang thai tan cong
         if(performCloseRangeAction)
         {
-            stateMachine.ChangeState(enemy.meleeAttackState);
+            if(Time.time >= enemy.dodgeState.startTime + enemy.dodgeStateData.dodgeCooldown)
+            {
+                stateMachine.ChangeState(enemy.dodgeState);
+            }
+            else
+            {
+                stateMachine.ChangeState(enemy.meleeAttackState);
+            }
+
         }
         else if(!isPlayerInMaxArgnRange) //trang thai nhin thay ngioi choi
         {
