@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class RangeAttackState : AttackState
 {
-    D_RangeAttaclState stateData;
+    protected D_RangeAttaclState stateData;
+    protected GameObject projectile;
+    protected Projectitle projectitleScript;
     public RangeAttackState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, Transform attackPosition, D_RangeAttaclState stateData) : base(entity, stateMachine, animBoolName, attackPosition)
     {
         this.stateData = stateData;
@@ -42,5 +44,9 @@ public class RangeAttackState : AttackState
     public override void TriggerAttack()
     {
         base.TriggerAttack();
+
+        projectile =  GameObject.Instantiate(stateData.projectile, attackPosition.position, attackPosition.rotation);
+        projectitleScript = projectile.GetComponent<Projectitle>();
+        projectitleScript.FireProjectile(stateData.projectileSpeed, stateData.projectitleTravelDistance, stateData.projectileDamage);
     }
 }

@@ -42,10 +42,14 @@ public class E2_PlayerDetectedState : PlayerDecetedState
             }
 
         }
+        else if(performLongRangeAction){
+            stateMachine.ChangeState(enemy.rangeAttackState);
+        }
         else if(!isPlayerInMaxArgnRange) //trang thai nhin thay ngioi choi
         {
             stateMachine.ChangeState(enemy.lookForPlayerState);
         }
+
     }
 
     public override void PhysicsUpdate()
