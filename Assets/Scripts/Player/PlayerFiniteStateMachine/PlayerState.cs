@@ -8,6 +8,8 @@ public class PlayerState
     protected PlayerStateMachine stateMachine;
     protected PlayerData playerData;
 
+    protected bool isAnimationFinished;
+
     protected float startTime;
 
     private string animBoolName; //goi animation name 
@@ -25,12 +27,16 @@ public class PlayerState
     public virtual void Enter()
     {
         DoCheck();
+        player.Anim.SetBool(animBoolName, true); 
+        startTime = Time.time;
+        Debug.Log(animBoolName);
+        isAnimationFinished = false;
     }
 
     //ket thuc
     public virtual void Exit()
-    {
-
+    { 
+         player.Anim.SetBool(animBoolName, false); 
     }
 
     //xu ly Logic cua tat ca phuong thuc
@@ -50,4 +56,9 @@ public class PlayerState
     {
 
     }
+
+    public virtual void AnimationTrigger()
+    {
+    }
+    public virtual void AnimationFinishTrigger() => isAnimationFinished = true;
 }
