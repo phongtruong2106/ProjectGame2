@@ -38,9 +38,11 @@ public class PlayerGroundedState : PlayerState
         {
             player.InputHandler.UseJumpInput();
             stateMachine.ChangeState(player.JumpState); //thuc hien jump chuyen trang thai nhay
-        } else if(!isGrounded)
+        } 
+        else if(!isGrounded)
         {
             player.InAirState.StartCoyoteTime();
+            // player.JumpState.DecreaseAmountOfJumpsLeft();
             stateMachine.ChangeState(player.InAirState);
         }
     }
