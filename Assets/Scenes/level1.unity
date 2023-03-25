@@ -249,6 +249,37 @@ Transform:
   m_Father: {fileID: 1392328171}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &271073219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 271073220}
+  m_Layer: 11
+  m_Name: WallCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &271073220
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271073219}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.111, y: -0.157, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1959375304}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &277494209
 GameObject:
   m_ObjectHideFlags: 0
@@ -45060,7 +45091,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 453646783}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.670508, y: 1.5175419, z: -8.922474}
+  m_LocalPosition: {x: 8.712508, y: 1.526542, z: -8.922474}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -45260,7 +45291,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.670508, y: 1.5175419, z: -8.922474}
+  m_LocalPosition: {x: 8.712508, y: 1.526542, z: -8.922474}
   m_LocalScale: {x: -3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -45836,7 +45867,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 8
-  m_Material: {fileID: 6200000, guid: 83720e097d03772409a0f71a43b11097, type: 2}
+  m_Material: {fileID: 6200000, guid: 749e3214b4947fa4293797bc726d3560, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -52557,11 +52588,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1959375303}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.208, y: 2.04, z: 0}
+  m_LocalPosition: {x: 7.25, y: 2.049, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 87660717}
+  - {fileID: 271073220}
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -52644,6 +52676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 17c0618e01beef349b795ea6656ea33d, type: 2}
   groundCheck: {fileID: 87660717}
+  wallCheck: {fileID: 271073220}
 --- !u!114 &1959375308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52701,6 +52734,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 746cdc9b-80fa-4ac8-9877-608aaa86a65b
     m_ActionName: GamepLayer/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1959375306}
+        m_TargetAssemblyTypeName: PlayerInputHandel, Assembly-CSharp
+        m_MethodName: OnGrabInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f74d9929-c354-49dc-92e8-ac7de7a1b958
+    m_ActionName: GamepLayer/Grab[/Keyboard/ctrl]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: GamepLayer
@@ -52747,7 +52796,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 5
+  m_GravityScale: 2
   m_Material: {fileID: 6200000, guid: 83720e097d03772409a0f71a43b11097, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -52909,11 +52958,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6560265466785515488, guid: ed1fa952ea71b4f4497237271f9d7e3f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.22
+      value: 7.135
       objectReference: {fileID: 0}
     - target: {fileID: 6560265466785515488, guid: ed1fa952ea71b4f4497237271f9d7e3f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.07
+      value: 1.956
       objectReference: {fileID: 0}
     - target: {fileID: 6560265466785515488, guid: ed1fa952ea71b4f4497237271f9d7e3f, type: 3}
       propertyPath: m_LocalPosition.z

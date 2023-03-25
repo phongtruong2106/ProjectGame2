@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
     //trang thai khong trung
     public PlayerInAirState InAirState{get; private set;}
     public PlayerLandState LandState{get; private set;}
+    public PlayerWallSlideState WallSlideState{get; private set;}
+    public PlayerWallGrabState WallGrabState{get; private set;}
+    public PlayerWallClimbState WallClimbState{get; private set;}
     [SerializeField]
     private PlayerData playerData;
     #endregion
@@ -24,13 +27,15 @@ public class Player : MonoBehaviour
     //trang thai animation
     public Animator Anim {get; private set;}
     public PlayerInputHandel InputHandler{get; private set;}
-
+    
     public Rigidbody2D RB{get; private set;}
     #endregion
     
-    #region Check Tranforms 
+    #region Check Transforms
     [SerializeField]
     private Transform groundCheck;
+    [SerializeField]
+    private Transform wallCheck;
     #endregion
 
     #region Other Variable
@@ -49,6 +54,9 @@ public class Player : MonoBehaviour
         JumpState = new PlayerJumpState(this, StateMachine, playerData, "inAir");
         InAirState = new PlayerInAirState(this, StateMachine, playerData, "inAir");
         LandState = new PlayerLandState(this, StateMachine, playerData, "land");
+        WallSlideState = new PlayerWallSlideState(this, StateMachine, playerData, "wallSlide");
+        WallGrabState = new PlayerWallGrabState(this, StateMachine, playerData, "wallGrab");
+        WallClimbState = new PlayerWallClimbState(this, StateMachine, playerData, "wallClimb");
 
     }
 
@@ -90,9 +98,14 @@ public class Player : MonoBehaviour
     #endregion
     
     #region Check Functions
-    public bool CheckIfTouchingGround() //kiem tra Cham ground
+    public bool CheckIfGrounded() //kiem tra Cham ground
     {
         return Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.whatIsGround);
+    }
+
+    public bool CheckTouchingWall() //kiem tra cham wall
+    {
+        return Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, playerData.wallCheckDistance, playerData.whatIsGround);   
     }
     public void CheckIfShouldFlip(int XInput)
     {
