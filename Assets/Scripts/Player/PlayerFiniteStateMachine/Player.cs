@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     public PlayerWallSlideState WallSlideState{get; private set;}
     public PlayerWallGrabState WallGrabState{get; private set;}
     public PlayerWallClimbState WallClimbState{get; private set;}
+    public PlayerWallJumpState WallJumpState{get; private set;}
+    public PlayerLedgeClimbState LedgeClimbState{get; private set;}
     [SerializeField]
     private PlayerData playerData;
     #endregion
@@ -57,6 +59,8 @@ public class Player : MonoBehaviour
         WallSlideState = new PlayerWallSlideState(this, StateMachine, playerData, "wallSlide");
         WallGrabState = new PlayerWallGrabState(this, StateMachine, playerData, "wallGrab");
         WallClimbState = new PlayerWallClimbState(this, StateMachine, playerData, "wallClimb");
+        WallJumpState = new PlayerWallJumpState(this,StateMachine, playerData, "inAir");
+        
 
     }
 
@@ -82,14 +86,23 @@ public class Player : MonoBehaviour
     #endregion
     
     #region  Set Functions
-    public void SetVelocityX(float velocity) //huong duy chuyen truc x
+
+    public void SetVelocity(float velocity,Vector2 angle, int direction) //cai dat van toc
+    {
+        // lam binh thuong hoa angle
+        angle.Normalize();
+        workspace.Set(angle.x * velocity * direction, angle.y *velocity);
+        RB.velocity= workspace;
+        CurrentVelocity = workspace;
+    } 
+    public void SetVelocityX(float velocity) //cai dat van toc huong duy chuyen truc x
     {
         workspace.Set(velocity, CurrentVelocity.y);
         RB.velocity = workspace;
         CurrentVelocity = workspace;
     }
 
-    public void SetVelocityY(float velocity) //huong duy chuyen truc Y
+    public void SetVelocityY(float velocity) //cai dat van toc huong duy chuyen truc Y
     {
         workspace.Set(CurrentVelocity.x, velocity);
         RB.velocity = workspace;
@@ -103,9 +116,15 @@ public class Player : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.whatIsGround);
     }
 
-    public bool CheckTouchingWall() //kiem tra cham wall
+    public bool CheckIfTouchingWall() //kiem tra cham wall
     {
         return Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, playerData.wallCheckDistance, playerData.whatIsGround);   
+    }
+
+    //kiem tra cham wall back
+    public bool CheckIfTouchingWallBack()
+    {
+        return Physics2D.Raycast(wallCheck.position, Vector2.right * -FacingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
     }
     public void CheckIfShouldFlip(int XInput)
     {

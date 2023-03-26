@@ -12,10 +12,16 @@ public class PlayerInAirState : PlayerState
     //check
     private bool isGrounded;
     private bool isTouchingWall;
-    
+    private bool isTouchingWallBack;
+    private bool oldIsTouchingWall;
+    private bool oldIsTouchingWallBack;
+
     private bool jumpInputStop;
     private bool coyoteTime;
+    private bool wallJumpCoyoteTime;
     private bool isJumping;
+
+    private float startWallJumpCoyoteTime;
     public PlayerInAirState(Player player, PlayerStateMachine playerStateMachine, PlayerData playerData, string animBoolName) : base(player, playerStateMachine, playerData, animBoolName)
     {
     }
@@ -23,9 +29,18 @@ public class PlayerInAirState : PlayerState
     public override void DoCheck()
     {
         base.DoCheck();
+
+        oldIsTouchingWall = isTouchingWall;
+        oldIsTouchingWallBack = isTouchingWallBack;
         
         isGrounded = player.CheckIfGrounded();
-        isTouchingWall = player.CheckTouchingWall();
+        isTouchingWall = player.CheckIfTouchingWall();
+        isTouchingWallBack = player.CheckIfTouchingWallBack();
+
+        if(!wallJumpCoyoteTime && !isTouchingWall && !isTouchingWallBack && (oldIsTouchingWall || oldIsTouchingWallBack))
+        {
+            StartWallJumpCoyoteTime();
+        }
         
     }
 
@@ -36,7 +51,11 @@ public class PlayerInAirState : PlayerState
     public override void Exit()
     {
         base.Exit();
+        oldIsTouchingWall = false;
+        oldIsTouchingWallBack = false;
         isTouchingWall = false;
+        isTouchingWallBack = false;
+        
     }
 
     public override void LogicUpdate()
@@ -44,6 +63,7 @@ public class PlayerInAirState : PlayerState
         base.LogicUpdate();
 
         CheckCoyoteTime();
+        CheckWallJumpCoyoteTime();
 
         xInput = player.InputHandler.NormInputX;
         jumpInput = player.InputHandler.JumpInput;
@@ -56,9 +76,16 @@ public class PlayerInAirState : PlayerState
         {
             stateMachine.ChangeState(player.LandState);
         }
+        else if(jumpInput && (isTouchingWall || isTouchingWallBack))
+        {
+            StopWallJumpCoyoteTime();
+            isTouchingWall = player.CheckIfTouchingWall();
+            player.WallJumpState.DetermineWallJumpDirection(isTouchingWall);
+            stateMachine.ChangeState(player.WallJumpState);
+        }
         else if(jumpInput && player.JumpState.CanJump())
         {
-            player.InputHandler.UseJumpInput();
+
             stateMachine.ChangeState(player.JumpState);
         }
         else if(isTouchingWall && grabInput)
@@ -109,7 +136,23 @@ public class PlayerInAirState : PlayerState
         }
     }
 
+    //check thoi gian Coyote Wall Jump
+    private void CheckWallJumpCoyoteTime()
+    {
+        if(wallJumpCoyoteTime && Time.time > startWallJumpCoyoteTime + playerData.coyoteTime) //neu thoi gian Coyote Nhay tuong va Time mac dinh lon hon time bat dau cong void time coyote
+        {
+                //thi wallJumpCoyoteTime tro ve 0 => false
+                wallJumpCoyoteTime = false;
+        }
+    }
     public void StartCoyoteTime() => coyoteTime = true;
-
+    //chuc nang thoi gian coyote Jump Wall
+    public void StartWallJumpCoyoteTime() 
+    {
+        wallJumpCoyoteTime = true;
+        startWallJumpCoyoteTime = Time.time;
+    } 
+        
+    public void StopWallJumpCoyoteTime() => wallJumpCoyoteTime = false;
     public void SetIsJumping() => isJumping = true;
 }
