@@ -17,7 +17,7 @@ public class PlayerGroundedState : PlayerState
     {
         base.DoCheck();
         isGrounded = player.CheckIfGrounded();
-        isTouchingWall = player.CheckTouchingWall();
+        isTouchingWall = player.CheckIfTouchingWall();
     }
 
     public override void Enter()
@@ -40,7 +40,6 @@ public class PlayerGroundedState : PlayerState
 
         if(JumpInput && player.JumpState.CanJump())
         {
-            player.InputHandler.UseJumpInput();
             stateMachine.ChangeState(player.JumpState); //thuc hien jump chuyen trang thai nhay
         } 
         else if(!isGrounded)

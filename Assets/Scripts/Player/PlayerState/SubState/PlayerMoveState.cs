@@ -29,7 +29,7 @@ public class PlayerMoveState : PlayerGroundedState
         player.CheckIfShouldFlip(XInput);
         player.SetVelocityX(playerData.movementVelocity * XInput);
 
-        if(XInput == 0) //khi van toc tro ve 0 thi doi trang thai idie
+        if(XInput == 0 && !isExitingState) //khi van toc tro ve 0 thi doi trang thai idie
         {
             stateMachine.ChangeState(player.IdieState);
         }

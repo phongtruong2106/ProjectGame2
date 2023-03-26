@@ -10,16 +10,19 @@ public class PlayerLandState : PlayerGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        if(!isExitingState)
+        {
+            //dieu kien chuyen sang trang thai Duy chuyen
+            if(XInput != 0)
+            {
+                stateMachine.ChangeState(player.MoveState);
+            }
+            else if(isAnimationFinished)
+            {
+                stateMachine.ChangeState(player.IdieState);
+            }
+        }
 
-        //dieu kien chuyen sang trang thai Duy chuyen
-        if(XInput != 0)
-        {
-            stateMachine.ChangeState(player.MoveState);
-        }
-        else if(isAnimationFinished)
-        {
-            stateMachine.ChangeState(player.IdieState);
-        }
     }
 
 }
