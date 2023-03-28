@@ -154,6 +154,37 @@ Transform:
   m_Father: {fileID: 1392328171}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &24738416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 24738417}
+  m_Layer: 11
+  m_Name: LedgeCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &24738417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24738416}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.117, y: 0.016, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1959375304}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &87660716
 GameObject:
   m_ObjectHideFlags: 0
@@ -45091,7 +45122,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 453646783}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.712508, y: 1.526542, z: -8.922474}
+  m_LocalPosition: {x: 8.704508, y: 1.5315418, z: -8.922474}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -45291,7 +45322,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.712508, y: 1.526542, z: -8.922474}
+  m_LocalPosition: {x: 8.704508, y: 1.5315418, z: -8.922474}
   m_LocalScale: {x: -3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -45866,7 +45897,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 8
+  m_GravityScale: 4
   m_Material: {fileID: 6200000, guid: 749e3214b4947fa4293797bc726d3560, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -52588,12 +52619,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1959375303}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.25, y: 2.049, z: 0}
+  m_LocalPosition: {x: 7.242, y: 2.054, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 87660717}
   - {fileID: 271073220}
+  - {fileID: 24738417}
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -52677,6 +52709,7 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 17c0618e01beef349b795ea6656ea33d, type: 2}
   groundCheck: {fileID: 87660717}
   wallCheck: {fileID: 271073220}
+  ledgeCheck: {fileID: 24738417}
 --- !u!114 &1959375308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53076,6 +53109,10 @@ PrefabInstance:
     - target: {fileID: 7680264517909458565, guid: 68ed9d2aaba78b94c998ef2ac808b292, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7680264518414664148, guid: 68ed9d2aaba78b94c998ef2ac808b292, type: 3}
+      propertyPath: m_GravityScale
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68ed9d2aaba78b94c998ef2ac808b292, type: 3}

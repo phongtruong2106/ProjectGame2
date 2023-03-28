@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputHandel : MonoBehaviour
 {
+    private PlayerInput playerInput;
     public Vector2 RawMovementInput{ get; private set;}
     public int NormInputX{get; private set;}
     public int NormInputY{get; private set;}
@@ -19,6 +20,10 @@ public class PlayerInputHandel : MonoBehaviour
 
     private float jumpInputStartTime;
 
+    private void Start() {
+        playerInput = GetComponent<PlayerInput>();
+
+    }
 
     private void Update() {
         //kiem tra thoi gian bat dau vao so voi thoi gian hien tai

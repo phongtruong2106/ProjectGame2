@@ -13,6 +13,9 @@ public class PlayerInAirState : PlayerState
     private bool isGrounded;
     private bool isTouchingWall;
     private bool isTouchingWallBack;
+    private bool isTouchingLedge;
+
+
     private bool oldIsTouchingWall;
     private bool oldIsTouchingWallBack;
 
@@ -35,7 +38,13 @@ public class PlayerInAirState : PlayerState
         
         isGrounded = player.CheckIfGrounded();
         isTouchingWall = player.CheckIfTouchingWall();
-        isTouchingWallBack = player.CheckIfTouchingWallBack();
+        isTouchingWallBack = player.CheckIfTouchingWallBack(); 
+        isTouchingLedge = player.CheckIfTouchingLedge(); //kiem tra ledge
+
+        if(isTouchingWall && !isTouchingLedge)
+        {
+            player.LedgeClimbState.SetDetectedPosition(player.transform.position);
+        }
 
         if(!wallJumpCoyoteTime && !isTouchingWall && !isTouchingWallBack && (oldIsTouchingWall || oldIsTouchingWallBack))
         {
@@ -74,9 +83,13 @@ public class PlayerInAirState : PlayerState
 
         if(isGrounded && player.CurrentVelocity.y < 0.01f)
         {
-            stateMachine.ChangeState(player.LandState);
+             stateMachine.ChangeState(player.LandState);
         }
-        else if(jumpInput && (isTouchingWall || isTouchingWallBack))
+        else if(isTouchingWall && !isTouchingLedge)
+        {
+            stateMachine.ChangeState(player.LedgeClimbState);
+        }
+        else if(jumpInput && (isTouchingWall || isTouchingWallBack || wallJumpCoyoteTime))
         {
             StopWallJumpCoyoteTime();
             isTouchingWall = player.CheckIfTouchingWall();
