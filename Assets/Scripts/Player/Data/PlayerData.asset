@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   movementVelocity: 3
-  jumpVelocity: 6
-  amountOfJumps: 2
-  wallJumpVelocity: 7
+  jumpVelocity: 4.7
+  amountOfJumps: 1
+  wallJumpVelocity: 5.8
   wallJumpTime: 0.4
   wallJumpAngle: {x: 1, y: 2}
   coyoteTime: 0.15
   variableJumpHeightMultiplier: 0.25
   wallSlideVelocity: 1
   wallClimbVelocity: 3
-  startOffset: {x: 0, y: -0.0025}
-  stopOffset: {x: -0.25, y: -0.25}
+  startOffset: {x: 0, y: 0.000025}
+  stopOffset: {x: 0.25, y: 0.25}
   groundCheckRadius: 0.1
   wallCheckDistance: 0.3
   whatIsGround:
