@@ -31,6 +31,9 @@ public class PlayerData : ScriptableObject
     public Vector2 startOffset;
     public Vector2 stopOffset;
 
+    [Header("Dash State")]
+    public float dashCoolDown = 0.5f; //khoan thoi gian dash bi han che
+
     [Header("Check Variable")]
     public float groundCheckRadius = 0.3f;
     public float wallCheckDistance = 0.5f;

@@ -7,19 +7,20 @@ public class PlayerInAirState : PlayerState
     //input
     private int xInput;
     private bool jumpInput;
+    private bool jumpInputStop;
     private bool grabInput;
+    private bool dashInput;
 
     //check
     private bool isGrounded;
     private bool isTouchingWall;
     private bool isTouchingWallBack;
+    private bool oldIsTouchingWall;
+    private bool oldIsTouchingWallBack;
     private bool isTouchingLedge;
 
 
-    private bool oldIsTouchingWall;
-    private bool oldIsTouchingWallBack;
 
-    private bool jumpInputStop;
     private bool coyoteTime;
     private bool wallJumpCoyoteTime;
     private bool isJumping;
@@ -78,36 +79,41 @@ public class PlayerInAirState : PlayerState
         jumpInput = player.InputHandler.JumpInput;
         jumpInputStop = player.InputHandler.JumpInputStop;
         grabInput = player.InputHandler.GrabInput;
+        dashInput = player.InputHandler.DashInput;
 
         CheckJumpMultiplier();
 
-        if(isGrounded && player.CurrentVelocity.y < 0.01f)
+        if(isGrounded && player.CurrentVelocity.y < 0.01f) //thuc hien chuyen doi trang thai Di bo
         {
              stateMachine.ChangeState(player.LandState);
         }
-        else if(isTouchingWall && !isTouchingLedge)
+        else if(isTouchingWall && !isTouchingLedge && !isGrounded) //thuc hien chuyen doi trang thai Ledge Climb
         {
             stateMachine.ChangeState(player.LedgeClimbState);
         }
-        else if(jumpInput && (isTouchingWall || isTouchingWallBack || wallJumpCoyoteTime))
+        else if(jumpInput && (isTouchingWall || isTouchingWallBack || wallJumpCoyoteTime)) //thuc hien chuyen doi trang thai Wall Jump
         {
             StopWallJumpCoyoteTime();
             isTouchingWall = player.CheckIfTouchingWall();
             player.WallJumpState.DetermineWallJumpDirection(isTouchingWall);
             stateMachine.ChangeState(player.WallJumpState);
         }
-        else if(jumpInput && player.JumpState.CanJump())
+        else if(jumpInput && player.JumpState.CanJump()) //thuc hien chuyen doi trang thai Jump
         {
 
             stateMachine.ChangeState(player.JumpState);
         }
-        else if(isTouchingWall && grabInput)
+        else if(isTouchingWall && grabInput && isTouchingLedge) // thuc hien chuyen doi trang thai Wall Grab
         {
             stateMachine.ChangeState(player.WallGrabState);
         }
-        else if(isTouchingWall && xInput == player.FacingDirection && player.CurrentVelocity.y <= 0)
+        else if(isTouchingWall && xInput == player.FacingDirection && player.CurrentVelocity.y <= 0) //thuc hien chuyen doi trang thai Wall Slide
         {
             stateMachine.ChangeState(player.WallSlideState);
+        }
+        else if(dashInput && player.DashState.CheckIfCanDash()) //thuc hien chuyen doi trang thai Dash 
+        {
+            stateMachine.ChangeState(player.DashState);
         }
         else
         {

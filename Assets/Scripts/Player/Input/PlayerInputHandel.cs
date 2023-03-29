@@ -12,6 +12,8 @@ public class PlayerInputHandel : MonoBehaviour
     public bool JumpInput{get; private set;}
     public bool JumpInputStop{get; private set;}
     public bool GrabInput {get; private set;}
+    public bool DashInput{get; private set;}
+    public bool DashInputStop{get; private set;}
 
 
 
@@ -19,6 +21,7 @@ public class PlayerInputHandel : MonoBehaviour
     private float inputHoldTime = 0.2f;
 
     private float jumpInputStartTime;
+    private float dashInputStartTime;
 
     private void Start() {
         playerInput = GetComponent<PlayerInput>();
@@ -28,6 +31,7 @@ public class PlayerInputHandel : MonoBehaviour
     private void Update() {
         //kiem tra thoi gian bat dau vao so voi thoi gian hien tai
         CheckJumpInputHoldTime();
+        CheckDashHoldTime();
     }
     public void OnMoveInput(InputAction.CallbackContext context)
     {
@@ -77,8 +81,26 @@ public class PlayerInputHandel : MonoBehaviour
         }
     }
 
+    //Create Function input Dash
+    public void OnDashInput(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            DashInput = true;
+            DashInputStop = false;
+            dashInputStartTime = Time.time;
+        }
+        else if(context.canceled)
+        {
+            DashInputStop = true;
+        }
+    }
+
     //tao phuong thuc su dung Input Jump
     public void UseJumpInput() => JumpInput = false;
+
+    // tao phuong thuc su dung DASHiNPUT
+    public void UseDashInput() => DashInput = false; 
 
     //kiem tra thoi gian dau vao 
     private void CheckJumpInputHoldTime()
@@ -86,6 +108,15 @@ public class PlayerInputHandel : MonoBehaviour
         if(Time.time >= jumpInputStartTime + inputHoldTime)
         {
             JumpInput = false;
+        }
+    }
+
+    //kiem tra thoi gian dau vao Dash
+    private void CheckDashHoldTime()
+    {
+        if(Time.time >= dashInputStartTime + inputHoldTime)
+        {
+            DashInput = false;
         }
     }
 }
