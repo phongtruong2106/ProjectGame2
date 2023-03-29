@@ -13,11 +13,31 @@ public class PlayerDashState : PlayerAbilityState
 
     }
 
+
+    public override void Enter()
+    {
+        base.Enter();
+
+        CanDash = false;
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+    }
+    
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
+    }
+
     //function transition to the state, CheckIfCanDash
     public bool CheckIfCanDash()
     {
         return CanDash && Time.time >= lastDashTime + playerData.dashCoolDown; //ham se tra ve true neu dash la true
     }
 
-    
+    public void ResetCanDash() => CanDash = true; //reset Dash khi thuc hien Dash truoc do
+
+
 }
