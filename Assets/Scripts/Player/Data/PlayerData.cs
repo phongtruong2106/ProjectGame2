@@ -32,7 +32,15 @@ public class PlayerData : ScriptableObject
     public Vector2 stopOffset;
 
     [Header("Dash State")]
-    public float dashCoolDown = 0.5f; //khoan thoi gian dash bi han che
+    public float dashCoolDown = 0.5f; //khoan thoi gian dash bi han che 
+    public float maxHoldTime = 1f; //thoi gian toi da giu trang thai Dash
+    public float holdTimeScale = 0.25f; //ti le thoi gian giu trang Dash
+    public float dashTime = 0.2f; //htoi gian thuc hien Dash
+    public float dashVelocity = 10f; //toc do thuc hien khi Dash
+    public float darg = 5f; //do troi khi thoi hien dash
+    public float dashEndYMultiplier = 0.2f; // ket thuc 
+    public float distBetweenAfterImages = 0.5f; //khoang cach giua cach hoat anh voi nhau
+    
 
     [Header("Check Variable")]
     public float groundCheckRadius = 0.3f;

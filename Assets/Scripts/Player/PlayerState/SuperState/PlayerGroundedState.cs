@@ -30,6 +30,8 @@ public class PlayerGroundedState : PlayerState
 
         //kiem tra tinh trang tiep dat
         player.JumpState.ResetAmountOfJumpsLeft();
+        //thuc hien lan dau tien su dung dash => tai lai Dash khi nguoi thuc hien dash    
+        player.DashState.ResetCanDash();
     }
     public override void Exit()
     {
