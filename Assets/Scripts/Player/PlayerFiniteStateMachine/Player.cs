@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     public PlayerInputHandel InputHandler{get; private set;}
     
     public Rigidbody2D RB{get; private set;}
+    public Transform DashDirectionIndicator{get; private set;}
     #endregion
     
     #region Check Transforms
@@ -72,6 +73,8 @@ public class Player : MonoBehaviour
             Anim = GetComponent<Animator>();
             InputHandler = GetComponent<PlayerInputHandel>();
             RB = GetComponent<Rigidbody2D>();
+            DashDirectionIndicator = transform.Find("DashDirectionIndicator"); //tim den Object Co ten DashDirectionIndicator
+            
 
             FacingDirection  = 1;
 
@@ -104,6 +107,14 @@ public class Player : MonoBehaviour
         RB.velocity= workspace;
         CurrentVelocity = workspace;
     } 
+
+    public void SetVelocity(float velocity, Vector2 direction)
+    {
+        workspace = direction * velocity;
+        RB.velocity = workspace;
+        CurrentVelocity = workspace;
+    }
+
     public void SetVelocityX(float velocity) //cai dat van toc huong duy chuyen truc x
     {
         workspace.Set(velocity, CurrentVelocity.y);

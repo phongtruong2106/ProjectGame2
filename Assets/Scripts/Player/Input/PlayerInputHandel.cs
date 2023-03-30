@@ -6,7 +6,12 @@ using UnityEngine.InputSystem;
 public class PlayerInputHandel : MonoBehaviour
 {
     private PlayerInput playerInput;
+    private Camera cam;
+
+    public Vector2 RawDashDirectionInput{get; private set;} //Ve Huong Dash dau vao
     public Vector2 RawMovementInput{ get; private set;}
+    public Vector2Int DashDirectionInput{get; private set;}
+
     public int NormInputX{get; private set;}
     public int NormInputY{get; private set;}
     public bool JumpInput{get; private set;}
@@ -14,6 +19,7 @@ public class PlayerInputHandel : MonoBehaviour
     public bool GrabInput {get; private set;}
     public bool DashInput{get; private set;}
     public bool DashInputStop{get; private set;}
+
 
 
 
@@ -25,6 +31,7 @@ public class PlayerInputHandel : MonoBehaviour
 
     private void Start() {
         playerInput = GetComponent<PlayerInput>();
+        cam = Camera.main;
 
     }
 
@@ -94,6 +101,19 @@ public class PlayerInputHandel : MonoBehaviour
         {
             DashInputStop = true;
         }
+    }
+
+    //dau vao huong Dash
+    public void OnDashDirectionInput(InputAction.CallbackContext context)
+    {   
+          RawDashDirectionInput = context.ReadValue<Vector2>();
+
+        if(playerInput.currentControlScheme == "Keyboard")
+        {
+            RawDashDirectionInput = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth - RawDashDirectionInput.x, cam.pixelHeight - RawDashDirectionInput.y, 1.9f)) - transform.position;
+        }
+
+        DashDirectionInput = Vector2Int.RoundToInt(RawDashDirectionInput.normalized);
     }
 
     //tao phuong thuc su dung Input Jump
