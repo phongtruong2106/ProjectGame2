@@ -8412,6 +8412,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      other_lev_build_355: -2130778829
       other_lev_build_335: -982922858
       other_lev_build_288: -1822893938
       other_lev_build_120: 702682322
@@ -8426,7 +8427,6 @@ TextureImporter:
       other_lev_build_307: 1355620105
       other_lev_build_240: -1852572276
       other_lev_build_45: 2065081322
-      other_lev_build_216: -912188977
       other_lev_build_147: 1168562999
       other_lev_build_381: -822125183
       other_lev_build_261: -1831308968
@@ -8801,11 +8801,11 @@ TextureImporter:
       other_lev_build_312: 1567654478
       other_lev_build_16: 1434018030
       other_lev_build_304: -1161930762
-      other_lev_build_294: -2043833699
       other_lev_build_32: 202990771
-      other_lev_build_347: 919828656
       other_lev_build_92: 1479467426
-      other_lev_build_355: -2130778829
+      other_lev_build_216: -912188977
+      other_lev_build_294: -2043833699
+      other_lev_build_347: 919828656
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerGroundedState : PlayerState
 {
     protected int XInput;
+    protected int YInput;
     private bool JumpInput;
     private bool grabInput;
     private bool isGrounded;
@@ -43,6 +44,7 @@ public class PlayerGroundedState : PlayerState
 
         // dinh nghia cac phan tu
         XInput = player.InputHandler.NormInputX;
+        YInput = player.InputHandler.NormInputY;
         JumpInput = player.InputHandler.JumpInput;
         grabInput = player.InputHandler.GrabInput;
         dashInput = player.InputHandler.DashInput;
