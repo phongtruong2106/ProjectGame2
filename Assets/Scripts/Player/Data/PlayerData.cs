@@ -40,10 +40,17 @@ public class PlayerData : ScriptableObject
     public float darg = 5f; //do troi khi thoi hien dash
     public float dashEndYMultiplier = 0.2f; // ket thuc 
     public float distBetweenAfterImages = 0.5f; //khoang cach giua cach hoat anh voi nhau
+
+    [Header("Crouch States")]
+    public float crouchMovementVelocity = 5f;
+    public float crouchColliderHeight = 0.8f;
+    public float standColliderHeight = 0.3374966f;
+
     
 
     [Header("Check Variable")]
     public float groundCheckRadius = 0.3f;
+    public float groundCheckCeilingRadius = 0.6f;
     public float wallCheckDistance = 0.5f;
     public LayerMask whatIsGround;
 }

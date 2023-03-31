@@ -6,6 +6,9 @@ public class PlayerGroundedState : PlayerState
 {
     protected int XInput;
     protected int YInput;
+
+    protected bool isTouchingCeiling;
+
     private bool JumpInput;
     private bool grabInput;
     private bool isGrounded;
@@ -23,6 +26,8 @@ public class PlayerGroundedState : PlayerState
         isGrounded = player.CheckIfGrounded();
         isTouchingWall = player.CheckIfTouchingWall();
         isTouchingLedge = player.CheckIfTouchingLedge();
+        //dinh nghia  cho isTouchingCeiling
+        isTouchingCeiling = player.CheckForCelling();
     }
 
     public override void Enter()
@@ -63,7 +68,7 @@ public class PlayerGroundedState : PlayerState
         {
             stateMachine.ChangeState(player.WallGrabState);
         }
-         else if(dashInput && player.DashState.CheckIfCanDash()) //thuc hien chuyen doi trang thai Dash 
+         else if(dashInput && player.DashState.CheckIfCanDash() && !isTouchingCeiling) //thuc hien chuyen doi trang thai Dash 
         {
             stateMachine.ChangeState(player.DashState);
         }

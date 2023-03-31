@@ -30,12 +30,14 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Components
-    //trang thai animation
-    public Animator Anim {get; private set;}
-    public PlayerInputHandel InputHandler{get; private set;}
-    
-    public Rigidbody2D RB{get; private set;}
-    public Transform DashDirectionIndicator{get; private set;}
+        //trang thai animation
+        public Animator Anim {get; private set;}
+        public PlayerInputHandel InputHandler{get; private set;}
+        
+        public Rigidbody2D RB{get; private set;}
+        public Transform DashDirectionIndicator{get; private set;}
+        public BoxCollider2D MovementCollider {get; private set;}
+
     #endregion
     
     #region Check Transforms
@@ -45,6 +47,8 @@ public class Player : MonoBehaviour
     private Transform wallCheck;
     [SerializeField]
     private Transform ledgeCheck;
+    [SerializeField]
+    private Transform cellingCheck;
     #endregion
 
     #region Other Variable
@@ -78,6 +82,7 @@ public class Player : MonoBehaviour
             InputHandler = GetComponent<PlayerInputHandel>();
             RB = GetComponent<Rigidbody2D>();
             DashDirectionIndicator = transform.Find("DashDirectionIndicator"); //tim den Object Co ten DashDirectionIndicator
+            MovementCollider = GetComponent<BoxCollider2D>();
             
 
             FacingDirection  = 1;
@@ -135,6 +140,12 @@ public class Player : MonoBehaviour
     #endregion
     
     #region Check Functions
+
+
+    public bool CheckForCelling() //kiem tra tran nhan( hoac 1 thu tuong tu nhu tran nha)
+    {
+        return Physics2D.OverlapCircle(cellingCheck.position, playerData.groundCheckCeilingRadius, playerData.whatIsGround);
+    }
     public bool CheckIfGrounded() //kiem tra Cham ground
     {
         return Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.whatIsGround);
@@ -166,6 +177,17 @@ public class Player : MonoBehaviour
     
     #region Other Functions
 
+        public void SetColliderHeight(float height)
+        {
+            Vector2 center = MovementCollider.offset;
+            workspace.Set(MovementCollider.size.x, height);
+
+            //dieu chinh chieu cao nhu mong muon
+            center.y += (height - MovementCollider.size.y) / 2;
+
+            MovementCollider.size = workspace;
+            MovementCollider.offset = center;
+        }
         public Vector2 DetermineCornerPosition()
         {
             RaycastHit2D xHit = Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, playerData.wallCheckDistance, playerData.whatIsGround);

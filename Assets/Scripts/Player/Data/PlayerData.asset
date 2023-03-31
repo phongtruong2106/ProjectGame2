@@ -32,7 +32,11 @@ MonoBehaviour:
   darg: 2.5
   dashEndYMultiplier: 0.1
   distBetweenAfterImages: 0.25
+  crouchMovementVelocity: 3
+  crouchColliderHeight: 0.8
+  standColliderHeight: 0.3374966
   groundCheckRadius: 0.1
+  groundCheckCeilingRadius: 0.18
   wallCheckDistance: 0.3
   whatIsGround:
     serializedVersion: 2
