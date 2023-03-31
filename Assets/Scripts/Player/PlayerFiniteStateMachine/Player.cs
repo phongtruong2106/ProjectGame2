@@ -94,40 +94,40 @@ public class Player : MonoBehaviour
     
     #region  Set Functions
 
-    public void SetVelocityZero()
-    {
-        RB.velocity = Vector2.zero;
-        CurrentVelocity = Vector2.zero;
-    }
-    public void SetVelocity(float velocity,Vector2 angle, int direction) //cai dat van toc
-    {
-        // lam binh thuong hoa angle
-        angle.Normalize();
-        workspace.Set(angle.x * velocity * direction, angle.y *velocity);
-        RB.velocity= workspace;
-        CurrentVelocity = workspace;
-    } 
+        public void SetVelocityZero()
+        {
+            RB.velocity = Vector2.zero;
+            CurrentVelocity = Vector2.zero;
+        }
+        public void SetVelocity(float velocity,Vector2 angle, int direction) //cai dat van toc
+        {
+            // lam binh thuong hoa angle
+            angle.Normalize();
+            workspace.Set(angle.x * velocity * direction, angle.y *velocity);
+            RB.velocity= workspace;
+            CurrentVelocity = workspace;
+        } 
 
-    public void SetVelocity(float velocity, Vector2 direction)
-    {
-        workspace = direction * velocity;
-        RB.velocity = workspace;
-        CurrentVelocity = workspace;
-    }
+        public void SetVelocity(float velocity, Vector2 direction)
+        {
+            workspace = direction * velocity;
+            RB.velocity = workspace;
+            CurrentVelocity = workspace;
+        }
 
-    public void SetVelocityX(float velocity) //cai dat van toc huong duy chuyen truc x
-    {
-        workspace.Set(velocity, CurrentVelocity.y);
-        RB.velocity = workspace;
-        CurrentVelocity = workspace;
-    }
+        public void SetVelocityX(float velocity) //cai dat van toc huong duy chuyen truc x
+        {
+            workspace.Set(velocity, CurrentVelocity.y);
+            RB.velocity = workspace;
+            CurrentVelocity = workspace;
+        }
 
-    public void SetVelocityY(float velocity) //cai dat van toc huong duy chuyen truc Y
-    {
-        workspace.Set(CurrentVelocity.x, velocity);
-        RB.velocity = workspace;
-        CurrentVelocity = workspace;
-    }
+        public void SetVelocityY(float velocity) //cai dat van toc huong duy chuyen truc Y
+        {
+            workspace.Set(CurrentVelocity.x, velocity);
+            RB.velocity = workspace;
+            CurrentVelocity = workspace;
+        }
     #endregion
     
     #region Check Functions
@@ -166,9 +166,9 @@ public class Player : MonoBehaviour
         {
             RaycastHit2D xHit = Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
             float xDist = xHit.distance;
-            workspace.Set(xDist * FacingDirection, 0f);
+            workspace.Set((xDist + 0.015f) * FacingDirection, 0f);
             //truy cap ve RAYCAST 
-            RaycastHit2D yHit = Physics2D.Raycast(ledgeCheck.position + (Vector3)(workspace), Vector2.down, ledgeCheck.position.y - wallCheck.position.y, playerData.whatIsGround);
+            RaycastHit2D yHit = Physics2D.Raycast(ledgeCheck.position + (Vector3)(workspace), Vector2.down, ledgeCheck.position.y - wallCheck.position.y + 0.015f, playerData.whatIsGround);
             float yDist= yHit.distance;
 
             workspace.Set(wallCheck.position.x + (xDist * FacingDirection), ledgeCheck.position.y - yDist); //thiet lap vi tri chinh xac cua ledge
