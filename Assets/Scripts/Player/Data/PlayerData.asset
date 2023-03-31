@@ -24,13 +24,13 @@ MonoBehaviour:
   wallClimbVelocity: 3
   startOffset: {x: 0, y: 0.000025}
   stopOffset: {x: 0.25, y: 0.25}
-  dashCoolDown: 0.4
+  dashCoolDown: 0.25
   maxHoldTime: 1
   holdTimeScale: 0.25
   dashTime: 0.2
-  dashVelocity: 10
-  darg: 4
-  dashEndYMultiplier: 0.2
+  dashVelocity: 5
+  darg: 2.5
+  dashEndYMultiplier: 0.1
   distBetweenAfterImages: 0.25
   groundCheckRadius: 0.1
   wallCheckDistance: 0.3
