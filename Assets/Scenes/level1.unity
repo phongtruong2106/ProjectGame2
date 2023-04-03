@@ -92969,7 +92969,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 453646783}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.486508, y: 1.5925419, z: -8.922474}
+  m_LocalPosition: {x: 9.598508, y: 1.4885418, z: -8.922474}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -93169,7 +93169,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.486508, y: 1.5925419, z: -8.922474}
+  m_LocalPosition: {x: 9.598508, y: 1.4885418, z: -8.922474}
   m_LocalScale: {x: -3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -100497,7 +100497,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1959375303}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.024, y: 2.115, z: 0}
+  m_LocalPosition: {x: 8.136, y: 2.011, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -100696,6 +100696,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 82ae2188-bf11-4c61-b070-2983aac65d54
     m_ActionName: GamepLayer/DashDirection[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1959375306}
+        m_TargetAssemblyTypeName: PlayerInputHandel, Assembly-CSharp
+        m_MethodName: OnPrimaryAttackInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 72ba314b-7209-4b6c-bbbe-13ac46cc0581
+    m_ActionName: GamepLayer/PrimaryAttack[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1959375306}
+        m_TargetAssemblyTypeName: PlayerInputHandel, Assembly-CSharp
+        m_MethodName: OnSecondaryAttackInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1454693f-4b81-4985-98c8-2f3e8b7dfa39
+    m_ActionName: GamepLayer/SecondaryAttack[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: GamepLayer

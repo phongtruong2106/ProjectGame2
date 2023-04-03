@@ -83,7 +83,15 @@ public class PlayerInAirState : PlayerState
 
         CheckJumpMultiplier();
 
-        if(isGrounded && player.CurrentVelocity.y < 0.01f) //thuc hien chuyen doi trang thai Di bo
+        if(player.InputHandler.AttackInputs[(int)CombatInput.primary])
+        {
+            stateMachine.ChangeState(player.PrimarAttackState);
+        }
+        else if(player.InputHandler.AttackInputs[(int)CombatInput.secondary])
+        {
+            stateMachine.ChangeState(player.SecondaryAttackState);
+        }
+        else if(isGrounded && player.CurrentVelocity.y < 0.01f) //thuc hien chuyen doi trang thai Di bo
         {
              stateMachine.ChangeState(player.LandState);
         }
