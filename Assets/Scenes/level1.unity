@@ -101240,6 +101240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ab5128edfd4da4eb8f2f3c85c810f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponData: {fileID: 11400000, guid: a9c3efdad08a2ad43a4f216a1179cb1e, type: 2}
 --- !u!1001 &6560265466759228707
 PrefabInstance:
   m_ObjectHideFlags: 0
