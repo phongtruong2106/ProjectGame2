@@ -152,8 +152,6 @@ public class Player : MonoBehaviour
     #endregion
     
     #region Check Functions
-
-
     public bool CheckForCelling() //kiem tra tran nhan( hoac 1 thu tuong tu nhu tran nha)
     {
         return Physics2D.OverlapCircle(cellingCheck.position, playerData.groundCheckCeilingRadius, playerData.whatIsGround);
