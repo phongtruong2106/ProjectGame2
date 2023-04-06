@@ -91,7 +91,7 @@ public class PlayerInAirState : PlayerState
         {
             stateMachine.ChangeState(player.SecondaryAttackState);
         }
-        else if(isGrounded && player.CurrentVelocity.y < 0.01f) //thuc hien chuyen doi trang thai Di bo
+        else if(isGrounded && core.Movement.CurrentVelocity.y < 0.01f) //thuc hien chuyen doi trang thai Di bo
         {
              stateMachine.ChangeState(player.LandState);
         }
@@ -115,7 +115,7 @@ public class PlayerInAirState : PlayerState
         {
             stateMachine.ChangeState(player.WallGrabState);
         }
-        else if(isTouchingWall && xInput == player.FacingDirection && player.CurrentVelocity.y <= 0) //thuc hien chuyen doi trang thai Wall Slide
+        else if(isTouchingWall && xInput == player.FacingDirection && core.Movement.CurrentVelocity.y <= 0) //thuc hien chuyen doi trang thai Wall Slide
         {
             stateMachine.ChangeState(player.WallSlideState);
         }
@@ -126,10 +126,10 @@ public class PlayerInAirState : PlayerState
         else
         {
             player.CheckIfShouldFlip(xInput);
-            player.SetVelocityX(playerData.movementVelocity * xInput);
+            core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
 
-            player.Anim.SetFloat("yVelocity", player.CurrentVelocity.y);
-            player.Anim.SetFloat("xVelocity", Mathf.Abs(player.CurrentVelocity.x));
+            player.Anim.SetFloat("yVelocity", core.Movement.CurrentVelocity.y);
+            player.Anim.SetFloat("xVelocity", Mathf.Abs(core.Movement.CurrentVelocity.x));
         }
     }
 
@@ -139,10 +139,10 @@ public class PlayerInAirState : PlayerState
         {
             if(jumpInputStop)
             {
-                player.SetVelocityX(player.CurrentVelocity.y * playerData.variableJumpHeightMultiplier);
+                core.Movement.SetVelocityX(core.Movement.CurrentVelocity.y * playerData.variableJumpHeightMultiplier);
                 isJumping = false;
             }
-            else if(player.CurrentVelocity.y <= 0f)
+            else if(core.Movement.CurrentVelocity.y <= 0f)
             {
                 isJumping = false;
             }

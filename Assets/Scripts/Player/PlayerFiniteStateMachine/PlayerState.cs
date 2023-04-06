@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerState
 {
+    protected Core core;
     protected Player player;
     protected PlayerStateMachine stateMachine;
     protected PlayerData playerData;
@@ -22,6 +23,7 @@ public class PlayerState
         this.stateMachine = playerStateMachine;
         this.playerData = playerData;
         this.animBoolName = animBoolName;
+        core  = player.Core;
     }
 
     //dau vao

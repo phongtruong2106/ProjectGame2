@@ -15,7 +15,7 @@ public class PlayerWallJumpState : PlayerAbilityState
         //van toc dat diem cua nguoi choi 
         player.InputHandler.UseJumpInput();
         player.JumpState.ResetAmountOfJumpsLeft(); //lap lai so lan nhay
-        player.SetVelocity(playerData.wallJumpVelocity, playerData.wallJumpAngle, wallJumpDirection);
+        core.Movement.SetVelocity(playerData.wallJumpVelocity, playerData.wallJumpAngle, wallJumpDirection);
         player.CheckIfShouldFlip(wallJumpDirection); //check doi huong 
         player.JumpState.DecreaseAmountOfJumpsLeft();
     }
@@ -25,8 +25,8 @@ public class PlayerWallJumpState : PlayerAbilityState
         base.LogicUpdate();
 
         //Set hoat anh 
-        player.Anim.SetFloat("yVelocity", player.CurrentVelocity.y);
-        player.Anim.SetFloat("xVelocity", Mathf.Abs(player.CurrentVelocity.x));
+        player.Anim.SetFloat("yVelocity", core.Movement.CurrentVelocity.y);
+        player.Anim.SetFloat("xVelocity", Mathf.Abs(core.Movement.CurrentVelocity.x));
 
         if(Time.time >= startTime + playerData.wallJumpTime) // thoi gian nhay tuong lay tu playerData
         {

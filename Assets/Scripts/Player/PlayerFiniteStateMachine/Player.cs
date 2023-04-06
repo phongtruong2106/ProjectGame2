@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
 
     #region Components
         //trang thai animation
+        public Core Core{get; private set;}
         public Animator Anim {get; private set;}
         public PlayerInputHandel InputHandler{get; private set;}
         
@@ -58,7 +59,7 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Other Variable
-    public Vector2 CurrentVelocity{get; private set;}
+  
     public int FacingDirection{get; private set;}
     private Vector2 workspace;
     #endregion
@@ -66,6 +67,8 @@ public class Player : MonoBehaviour
     #region Unity Callback Functions
         private void Awake() {
             //bat cu khi nao tro choi bat dau , se co state Machine cho player 
+
+            Core = GetComponentInChildren<Core>();
             StateMachine = new PlayerStateMachine();
 
             IdieState = new PlayerIdleState(this, StateMachine, playerData, "idie");
@@ -103,51 +106,13 @@ public class Player : MonoBehaviour
         }
 
         private void Update() {
-            CurrentVelocity =RB.velocity;
+           Core.LogicUpDate();
             StateMachine.CurrentState.LogicUpdate(); //cham trang thai hien tai 
         }
 
         //tao ban cap nhat co dinh 
         private void FixedUpdate() {
             StateMachine.CurrentState.PhysicsUpdate();
-        }
-    #endregion
-    
-    #region  Set Functions
-
-        public void SetVelocityZero()
-        {
-            RB.velocity = Vector2.zero;
-            CurrentVelocity = Vector2.zero;
-        }
-        public void SetVelocity(float velocity,Vector2 angle, int direction) //cai dat van toc
-        {
-            // lam binh thuong hoa angle
-            angle.Normalize();
-            workspace.Set(angle.x * velocity * direction, angle.y *velocity);
-            RB.velocity= workspace;
-            CurrentVelocity = workspace;
-        } 
-
-        public void SetVelocity(float velocity, Vector2 direction)
-        {
-            workspace = direction * velocity;
-            RB.velocity = workspace;
-            CurrentVelocity = workspace;
-        }
-
-        public void SetVelocityX(float velocity) //cai dat van toc huong duy chuyen truc x
-        {
-            workspace.Set(velocity, CurrentVelocity.y);
-            RB.velocity = workspace;
-            CurrentVelocity = workspace;
-        }
-
-        public void SetVelocityY(float velocity) //cai dat van toc huong duy chuyen truc Y
-        {
-            workspace.Set(CurrentVelocity.x, velocity);
-            RB.velocity = workspace;
-            CurrentVelocity = workspace;
         }
     #endregion
     
