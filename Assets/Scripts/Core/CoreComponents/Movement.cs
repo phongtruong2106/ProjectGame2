@@ -6,6 +6,7 @@ public class Movement : CoreComponent
 {
     public Rigidbody2D RB{get; private set;}
     public Vector2 CurrentVelocity{get; private set;}
+    public int FacingDirection{get; private set;}
     private Vector2 workspace;
 
     protected override void Awake()
@@ -13,6 +14,8 @@ public class Movement : CoreComponent
         base.Awake();
 
         RB = GetComponentInParent<Rigidbody2D>();
+
+        FacingDirection = 1;
     }
 
     public void LogicUpdate()
@@ -55,6 +58,20 @@ public class Movement : CoreComponent
             workspace.Set(CurrentVelocity.x, velocity);
             RB.velocity = workspace;
             CurrentVelocity = workspace;
+        }
+        
+        public void CheckIfShouldFlip(int XInput)
+        {
+            if(XInput != 0 && XInput != FacingDirection)
+            {
+                Flip();
+            }
+        }
+
+        private void Flip()
+        {
+            FacingDirection *= -1;
+            RB.transform.Rotate(0.0f, 180.0f, 0.0f);
         }
     #endregion
 }

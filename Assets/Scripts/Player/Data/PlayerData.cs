@@ -52,8 +52,5 @@ public class PlayerData : ScriptableObject
     public float groundCheckRadius = 0.3f;
     public float groundCheckCeilingRadius = 0.6f;
     public float wallCheckDistance = 0.5f;
-    public LayerMask whatIsGround;
 
-    [Header("Attack counter")]
-    public int attackCounter = 3;
 }

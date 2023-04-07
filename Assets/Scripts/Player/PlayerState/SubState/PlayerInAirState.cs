@@ -37,10 +37,10 @@ public class PlayerInAirState : PlayerState
         oldIsTouchingWall = isTouchingWall;
         oldIsTouchingWallBack = isTouchingWallBack;
         
-        isGrounded = player.CheckIfGrounded();
-        isTouchingWall = player.CheckIfTouchingWall();
-        isTouchingWallBack = player.CheckIfTouchingWallBack(); 
-        isTouchingLedge = player.CheckIfTouchingLedge(); //kiem tra ledge
+        isGrounded = core.CollisionSenses.Grounded;
+        isTouchingWall = core.CollisionSenses.WallFront;
+        isTouchingWallBack = core.CollisionSenses.WallBack; 
+        isTouchingLedge = core.CollisionSenses.Ledge; //kiem tra ledge
 
         if(isTouchingWall && !isTouchingLedge)
         {
@@ -102,7 +102,7 @@ public class PlayerInAirState : PlayerState
         else if(jumpInput && (isTouchingWall || isTouchingWallBack || wallJumpCoyoteTime)) //thuc hien chuyen doi trang thai Wall Jump
         {
             StopWallJumpCoyoteTime();
-            isTouchingWall = player.CheckIfTouchingWall();
+            isTouchingWall = core.CollisionSenses.WallFront;
             player.WallJumpState.DetermineWallJumpDirection(isTouchingWall);
             stateMachine.ChangeState(player.WallJumpState);
         }
@@ -115,7 +115,7 @@ public class PlayerInAirState : PlayerState
         {
             stateMachine.ChangeState(player.WallGrabState);
         }
-        else if(isTouchingWall && xInput == player.FacingDirection && core.Movement.CurrentVelocity.y <= 0) //thuc hien chuyen doi trang thai Wall Slide
+        else if(isTouchingWall && xInput == core.Movement.FacingDirection && core.Movement.CurrentVelocity.y <= 0) //thuc hien chuyen doi trang thai Wall Slide
         {
             stateMachine.ChangeState(player.WallSlideState);
         }
@@ -125,7 +125,7 @@ public class PlayerInAirState : PlayerState
         }
         else
         {
-            player.CheckIfShouldFlip(xInput);
+           core.Movement.CheckIfShouldFlip(xInput);
             core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
 
             player.Anim.SetFloat("yVelocity", core.Movement.CurrentVelocity.y);

@@ -28,8 +28,8 @@ public class PlayerCrouchMoveState : PlayerGroundedState
 
         if(!isExitingState)
         {
-            core.Movement.SetVelocityX(playerData.crouchMovementVelocity * player.FacingDirection);
-            player.CheckIfShouldFlip(XInput);
+            core.Movement.SetVelocityX(playerData.crouchMovementVelocity * core.Movement.FacingDirection);
+           core.Movement.CheckIfShouldFlip(XInput);
 
             if(XInput==0) //neu dau vao toa do x == 0  => chuen vef trang thai Idle
             {

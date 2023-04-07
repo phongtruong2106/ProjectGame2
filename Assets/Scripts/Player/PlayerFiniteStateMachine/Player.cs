@@ -46,21 +46,8 @@ public class Player : MonoBehaviour
         public PlayerInventory Inventory{get; private set;}
 
     #endregion
-    
-    #region Check Transforms
-    [SerializeField]
-    private Transform groundCheck;
-    [SerializeField]
-    private Transform wallCheck;
-    [SerializeField]
-    private Transform ledgeCheck;
-    [SerializeField]
-    private Transform cellingCheck;
-    #endregion
-
     #region Other Variable
   
-    public int FacingDirection{get; private set;}
     private Vector2 workspace;
     #endregion
 
@@ -95,9 +82,7 @@ public class Player : MonoBehaviour
             DashDirectionIndicator = transform.Find("DashDirectionIndicator"); //tim den Object Co ten DashDirectionIndicator
             MovementCollider = GetComponent<BoxCollider2D>();
             Inventory = GetComponent<PlayerInventory>();
-            
 
-            FacingDirection  = 1;
 
             PrimaryAttackState.SetWeapon(Inventory.weapons[(int)CombatInput.primary]);
             // SecondaryAttackState.SetWeapon(Inventory.weapons[(int)CombatInput.primary]);
@@ -114,42 +99,7 @@ public class Player : MonoBehaviour
         private void FixedUpdate() {
             StateMachine.CurrentState.PhysicsUpdate();
         }
-    #endregion
-    
-    #region Check Functions
-    public bool CheckForCelling() //kiem tra tran nhan( hoac 1 thu tuong tu nhu tran nha)
-    {
-        return Physics2D.OverlapCircle(cellingCheck.position, playerData.groundCheckCeilingRadius, playerData.whatIsGround);
-    }
-    public bool CheckIfGrounded() //kiem tra Cham ground
-    {
-        return Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.whatIsGround);
-    }
-
-    public bool CheckIfTouchingWall() //kiem tra cham wall
-    {
-        return Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, playerData.wallCheckDistance, playerData.whatIsGround);   
-    }
-
-    public bool CheckIfTouchingLedge()
-    {
-        return Physics2D.Raycast(ledgeCheck.position, Vector2.right * FacingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
-    }
-
-    //kiem tra cham wall back
-    public bool CheckIfTouchingWallBack()
-    {
-        return Physics2D.Raycast(wallCheck.position, Vector2.right * -FacingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
-    }
-    public void CheckIfShouldFlip(int XInput)
-    {
-        if(XInput != 0 && XInput != FacingDirection)
-        {
-            Flip();
-        }
-    }
-    #endregion
-    
+    #endregion  
     #region Other Functions
 
         public void SetColliderHeight(float height)
@@ -163,25 +113,9 @@ public class Player : MonoBehaviour
             MovementCollider.size = workspace;
             MovementCollider.offset = center;
         }
-        public Vector2 DetermineCornerPosition()
-        {
-            RaycastHit2D xHit = Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
-            float xDist = xHit.distance;
-            workspace.Set((xDist + 0.015f) * FacingDirection, 0f);
-            //truy cap ve RAYCAST 
-            RaycastHit2D yHit = Physics2D.Raycast(ledgeCheck.position + (Vector3)(workspace), Vector2.down, ledgeCheck.position.y - wallCheck.position.y + 0.015f, playerData.whatIsGround);
-            float yDist= yHit.distance;
-
-            workspace.Set(wallCheck.position.x + (xDist * FacingDirection), ledgeCheck.position.y - yDist); //thiet lap vi tri chinh xac cua ledge
-            return workspace;//tra ve workspace
-        }
         private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
 
         private void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
-        private void Flip()
-        {
-            FacingDirection *= -1;
-            transform.Rotate(0.0f, 180.0f, 0.0f);
-        }
+      
     #endregion
 }
