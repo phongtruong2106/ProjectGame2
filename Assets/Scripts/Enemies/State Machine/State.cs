@@ -8,6 +8,7 @@ public class State
     //chieu den trang thai huu han
     protected FiniteStateMachine stateMachine;
     protected Entity entity;
+    protected Core Core;
   
     public float startTime{get; protected set;}
 
@@ -18,6 +19,7 @@ public class State
         this.entity = entity;
         this.stateMachine = stateMachine; 
         this.animBoolName = animBoolName; 
+        Core  = entity.Core;
     }
 
     public virtual void Enter() //su dung tu khoa ao, co nghia la chuc nang nay co the duoc xac dinh lai trong cac lop dan xuat va chuc nang nay se bi vo hieu 

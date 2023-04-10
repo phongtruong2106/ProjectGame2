@@ -117,10 +117,10 @@ public class PlayerLedgeClimbState : PlayerState
         float xDist = xHit.distance;
         workspace.Set((xDist + 0.015f) * core.Movement.FacingDirection, 0f);
         //truy cap ve RAYCAST 
-        RaycastHit2D yHit = Physics2D.Raycast(core.CollisionSenses.LegdeCheck.position + (Vector3)(workspace), Vector2.down, core.CollisionSenses.LegdeCheck.position.y - core.CollisionSenses.WallCheck.position.y + 0.015f, core.CollisionSenses.WhatisGround);
+        RaycastHit2D yHit = Physics2D.Raycast(core.CollisionSenses.LedgeCheckHorizontal.position + (Vector3)(workspace), Vector2.down, core.CollisionSenses.LedgeCheckHorizontal.position.y - core.CollisionSenses.WallCheck.position.y + 0.015f, core.CollisionSenses.WhatisGround);
         float yDist= yHit.distance;
 
-         workspace.Set(core.CollisionSenses.WallCheck.position.x + (xDist * core.Movement.FacingDirection), core.CollisionSenses.LegdeCheck.position.y - yDist); //thiet lap vi tri chinh xac cua ledge
+         workspace.Set(core.CollisionSenses.WallCheck.position.x + (xDist * core.Movement.FacingDirection), core.CollisionSenses.LedgeCheckHorizontal.position.y - yDist); //thiet lap vi tri chinh xac cua ledge
          return workspace;//tra ve workspace
     }
 

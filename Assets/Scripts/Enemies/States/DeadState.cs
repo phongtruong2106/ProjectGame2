@@ -19,8 +19,8 @@ public class DeadState : State
     {
         base.Enter();
         //bat dau voi trang thai cham hat mau , sau do ta se noi voi thuc the mot doi tuong truc tiep vi cham thanh vi tri ma ta dat san, cuoi cung chuyen doi rotation , dieu do cho phep tui tiep tuc 
-        GameObject.Instantiate(stateData.deathBloodParticle, entity.aliveGO.transform.position, stateData.deathBloodParticle.transform.rotation);
-        GameObject.Instantiate(stateData.deadChunkParticle, entity.aliveGO.transform.position, stateData.deadChunkParticle.transform.rotation);
+        GameObject.Instantiate(stateData.deathBloodParticle, entity.transform.position, stateData.deathBloodParticle.transform.rotation);
+        GameObject.Instantiate(stateData.deadChunkParticle, entity.transform.position, stateData.deadChunkParticle.transform.rotation);
 
         entity.gameObject.SetActive(false);
     }

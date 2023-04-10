@@ -21,8 +21,8 @@ public class MoveState : State
         base.DoChecks();
         
         //kiem tra thuc the wall , ledge  
-        isDetectingLedge = entity.checkLedge();
-        isDetectingWall = entity.CheckWall();
+        isDetectingLedge = Core.CollisionSenses.LedgeVertical;
+        isDetectingWall = Core.CollisionSenses.WallFront;
         isPlayerInMinArgoRange =entity.checkPlayerInMinAgroRange();
     }
 
@@ -30,7 +30,7 @@ public class MoveState : State
     public override void Enter()
     {
         base.Enter();
-        entity.SetVelocity(stateData.movementSpeed);
+        Core.Movement.SetVelocityX(stateData.movementSpeed * Core.Movement.FacingDirection);
     }
 
     public override void Exit()

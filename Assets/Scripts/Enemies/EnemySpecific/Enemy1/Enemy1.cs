@@ -33,9 +33,9 @@ public class Enemy1 : Entity //quy dinh Enemy1 la mot entity
     [SerializeField]
     private Transform meleeAttackPosition;
 
-    public override void Start() {
+    public override void Awake() {
         //instance
-        base.Start();
+        base.Awake();
 
         moveState = new E1_MoveState(this, stateMachine, "move", moveStateData, this);
         idleState = new E1_IdleState(this, stateMachine, "idle", idieStateData, this);

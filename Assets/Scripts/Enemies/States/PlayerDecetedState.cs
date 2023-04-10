@@ -21,7 +21,7 @@ public class PlayerDecetedState : State
         base.DoChecks();
         isPlayerInMinArgnRange = entity.checkPlayerInMinAgroRange();
         isPlayerInMaxArgnRange = entity.checkPlayerInMaxAgroRange();
-        isDetectingLedge = entity.checkLedge();
+        isDetectingLedge = Core.CollisionSenses.LedgeVertical;
         performCloseRangeAction = entity.CheckPlayerInCloseRangeAction();
     }
 
@@ -30,7 +30,7 @@ public class PlayerDecetedState : State
         base.Enter();
 
         performLongRangeAction = false;
-        entity.SetVelocity(0f);
+        Core.Movement.SetVelocityX(0f);
     }
     public override void Exit()
     {

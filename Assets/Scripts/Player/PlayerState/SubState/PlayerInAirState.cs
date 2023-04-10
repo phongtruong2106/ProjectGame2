@@ -37,10 +37,10 @@ public class PlayerInAirState : PlayerState
         oldIsTouchingWall = isTouchingWall;
         oldIsTouchingWallBack = isTouchingWallBack;
         
-        isGrounded = core.CollisionSenses.Grounded;
+        isGrounded = core.CollisionSenses.Ground;
         isTouchingWall = core.CollisionSenses.WallFront;
         isTouchingWallBack = core.CollisionSenses.WallBack; 
-        isTouchingLedge = core.CollisionSenses.Ledge; //kiem tra ledge
+        isTouchingLedge = core.CollisionSenses.LedgeHorizontal; //kiem tra ledge
 
         if(isTouchingWall && !isTouchingLedge)
         {

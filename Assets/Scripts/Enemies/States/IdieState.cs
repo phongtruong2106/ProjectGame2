@@ -26,7 +26,7 @@ public class IdieState : State
     public override void Enter()
     {
         base.Enter();
-        entity.SetVelocity(0f); //cho ke thu ngungduy chuyen 
+        Core.Movement.SetVelocityX(0f); //cho ke thu ngungduy chuyen 
         isIdleTimeOver = false;
         SetRandomIdleTime();
     }
@@ -37,7 +37,7 @@ public class IdieState : State
 
         if(flipAfterIdle)
         {
-            entity.Flip();
+            Core.Movement.Flip();
         }
     }
 

@@ -38,7 +38,7 @@ public class E1_PlayerDeceted : PlayerDecetedState
         } //phat hien legde sao do cham thuc the khac khi dang phat hien 
         else if(!isDetectingLedge)
         {
-            entity.Flip(); // khi phat hien thi quay nguoc 
+            Core.Movement.Flip(); // khi phat hien thi quay nguoc 
             //khi phat hien ledge chuyen sang doi trang thai duy chuyen
             stateMachine.ChangeState(enemy1.moveState);
 

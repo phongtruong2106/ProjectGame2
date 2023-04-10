@@ -21,9 +21,9 @@ public class ChangeState : State
         base.DoChecks();
 
          //kiem tra go bang go thuc the 
-        isPlayerInMinAgroRange = entity.CheckPlayerInCloseRangeAction();
-        isDetectingLedge = entity.checkLedge();
-        isDetectingWall = entity.CheckWall();
+        isPlayerInMinAgroRange = entity.checkPlayerInMinAgroRange();
+        isDetectingLedge = Core.CollisionSenses.LedgeVertical;
+        isDetectingWall = Core.CollisionSenses.WallFront;
 
 
         performCloseRangeAction = entity.CheckPlayerInCloseRangeAction();
@@ -34,8 +34,8 @@ public class ChangeState : State
         base.Enter();
 
         isChargeTimeOver = false;
-        isPlayerInMinAgroRange = entity.checkPlayerInMinAgroRange();
-        entity.SetVelocity(stateData.chargeSpeed);   
+        // isPlayerInMinAgroRange = entity.checkPlayerInMinAgroRange();
+        Core.Movement.SetVelocityX(stateData.chargeSpeed * Core.Movement.FacingDirection);   
     }
     public override void Exit()
     {
