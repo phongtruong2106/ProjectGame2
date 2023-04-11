@@ -8,7 +8,7 @@ public class SO_AggressiveWeaponData : SO_weaponData
 {
     [SerializeField] private WeaponAttackDetails[] attackDetails;
 
-    public WeaponAttackDetails[] AttackDetails {get => attackDetails; set => attackDetails = value;}
+    public WeaponAttackDetails[] AttackDetails {get => attackDetails; private set => attackDetails = value;}
 
     private void OnEnable() {
         amountOfAttacks = attackDetails.Length;

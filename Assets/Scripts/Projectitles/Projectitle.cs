@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Projectitle : MonoBehaviour
 {
-    private AttackDetails attackDetails;
+    // private AttackDetails attackDetails;
 
     private float speed;
     private float travelDistance;
@@ -41,7 +41,7 @@ public class Projectitle : MonoBehaviour
     private void Update() {
         if(!hasHitGround)
         {
-            attackDetails.position = transform.position;
+            // attackDetails.position = transform.position;
 
             if(isGravityOn)
             {
@@ -59,7 +59,7 @@ public class Projectitle : MonoBehaviour
 
             if(damageHit)
             {
-                damageHit.transform.SendMessage("Damage", attackDetails);
+                // damageHit.transform.SendMessage("Damage", attackDetails);
                 Destroy(gameObject);
             }
             if(groundHit)
@@ -81,7 +81,7 @@ public class Projectitle : MonoBehaviour
     {
         this.speed = speed;
         this.travelDistance = travelDistance;
-        attackDetails.damageAmount = damage;
+        // attackDetails.damageAmount = damage;
     }
 
     private void OnDrawGizmos() {

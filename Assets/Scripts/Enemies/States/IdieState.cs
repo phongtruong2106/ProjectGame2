@@ -44,6 +44,7 @@ public class IdieState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        Core.Movement.SetVelocityX(0f);
         if(Time.time >= startTime + idleTime)
         {
             isIdleTimeOver = true;

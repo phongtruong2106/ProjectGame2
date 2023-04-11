@@ -40,6 +40,7 @@ public class PlayerDecetedState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate(); 
+        Core.Movement.SetVelocityX(0f);
         //neu thoi gian co lon hon or = thoi gian bat dau + voi du lieu trang thai 
         if(Time.time >= startTime + stateData.longRangeActionTime){
                 //hanh dong tam xa

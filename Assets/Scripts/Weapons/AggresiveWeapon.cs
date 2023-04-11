@@ -6,7 +6,8 @@ using System.Linq;
 public class AggresiveWeapon : Weapon
 {
     protected SO_AggressiveWeaponData aggressiveWeaponData;
-    private List<IDamageable> detectedDamageable = new List<IDamageable>();
+    private List<IDamageable> detectedDamageables = new List<IDamageable>();
+    private List<IknockBackable> detectedKnockbackables = new List<IknockBackable>();
 
     protected override void Awake()
     {
@@ -31,9 +32,14 @@ public class AggresiveWeapon : Weapon
     private void  CheckMeleeAttack()
     {
         WeaponAttackDetails details  = aggressiveWeaponData.AttackDetails[attackCounter];
-        foreach(IDamageable item in detectedDamageable.ToList()) //goi phan tu item duyet tung thanh phan trong detectedDamageAble
+        foreach(IDamageable item in detectedDamageables.ToList()) //goi phan tu item duyet tung thanh phan trong detectedDamageAble
         {
             item.Damage(details.damageAmount);
+        }
+
+        foreach(IknockBackable item in detectedKnockbackables.ToList())
+        {
+            item.Knockback(details.knockbackAngle, details.knockbackStrenght, core.Movement.FacingDirection);
         }
 
     }
@@ -43,7 +49,12 @@ public class AggresiveWeapon : Weapon
 
         if(damageable != null)
         {
-            detectedDamageable.Add(damageable);
+            detectedDamageables.Add(damageable);
+        }
+        IknockBackable knockbackable = collision.GetComponent<IknockBackable>();
+        if(knockbackable != null)
+        {
+            detectedKnockbackables.Add(knockbackable);
         }
     }
 
@@ -53,7 +64,13 @@ public class AggresiveWeapon : Weapon
 
         if(damageable != null)
         {
-            detectedDamageable.Remove(damageable);
+            detectedDamageables.Remove(damageable);
+        }
+
+        IknockBackable knockbackable = collision.GetComponent<IknockBackable>();
+        if(knockbackable != null)
+        {
+            detectedKnockbackables.Remove(knockbackable);
         }
     }
 }

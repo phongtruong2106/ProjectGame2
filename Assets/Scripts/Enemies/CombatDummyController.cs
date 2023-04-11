@@ -51,44 +51,7 @@ public class CombatDummyController : MonoBehaviour
         CheckKnockback();
     }
 
-    //nhan damage
-    private void Damage(AttackDetails details){
-            currentHealth -= details.damageAmount;
-            
-            if(details.position.x < aliveGO.transform.position.x){
-                playerFacingDirection = 1;
-            }
-            else
-            {
-                playerFacingDirection = -1;
-            }
-            //khoi tao danh 
-            //khoi tao theo y muon theo euler bac 4 va cac tham so se la point : 0, f : 0 cho X , point 0 cho diem y 
-            Instantiate(hitParticle, aliveAnim.transform.position, Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f))); //khoi tao tren mot doi lap duoc chuyen doi cham dia ly truc tiep cho doi lap xoay
 
-            if(playerFacingDirection == 1){
-                playerOnLeft = true;
-            }
-            else
-            {
-                playerOnLeft = false;
-            }
-
-            aliveAnim.SetBool("PlayerOnLeft", playerOnLeft);
-            aliveAnim.SetTrigger("damage");
-
-            //ap dung danh tra va suc khoe hien tai
-            if(applyKnockback && currentHealth >0.0f)
-            {
-                //knockback
-                Knockback();
-
-            }
-            if(currentHealth <= 0.0f){
-                //neu gap diem 0 thi die
-                Die();
-            }
-    }
 
     //go nguoc lai
     private void Knockback(){

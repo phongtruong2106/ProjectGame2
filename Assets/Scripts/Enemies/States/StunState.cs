@@ -24,6 +24,7 @@ public class StunState : State
         performCloseRangeAction = entity.CheckPlayerInCloseRangeAction(); //check Player trong vung Phat hien
         isPlayerInMinAgroRange = entity.checkPlayerInMinAgroRange();
     }
+    
 
     public override void Enter()
     {

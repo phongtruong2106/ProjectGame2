@@ -45,6 +45,7 @@ public class ChangeState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+         Core.Movement.SetVelocityX(stateData.chargeSpeed * Core.Movement.FacingDirection);   
 
         if(Time.time >= startTime + stateData.chargeTime)
         {
