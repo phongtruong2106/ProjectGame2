@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,19 +24,39 @@ public class Core : MonoBehaviour
         private set => combat = value;
     }
 
+    public Stats Stats
+    {
+        get => GenericNotImplementedError<Stats>.TryGet(stats, transform.parent.name);
+        private set => stats = value;
+    }
+
     private Movement movement;
     private CollisionSenses collisionSenses;
     private Combat combat;
+    private Stats stats;
+
+    private List<ILogicUpdate> components = new List<ILogicUpdate>();
 
     private void Awake() {
         Movement = GetComponentInChildren<Movement>();
         CollisionSenses = GetComponentInChildren<CollisionSenses>();
         Combat = GetComponentInChildren<Combat>();
+        Stats = GetComponentInChildren<Stats>();
     }
 
     public void LogicUpDate()
     {
-        Movement.LogicUpdate();
-        Combat.LogicUpdate();
+        foreach (ILogicUpdate component in components)
+        {
+            component.LogicUpdate();
+        }
+    }
+
+    public void AddComponent(CoreComponent component)
+    {
+        if(components.Contains(component))
+        {
+            components.Add(component);
+        }
     }
 }
