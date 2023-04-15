@@ -54,9 +54,9 @@ public class Core : MonoBehaviour
 
     public void AddComponent(CoreComponent component)
     {
-        if(components.Contains(component))
+        if(!components.Contains(component))
         {
             components.Add(component);
         }
-    }
+    }   
 }
