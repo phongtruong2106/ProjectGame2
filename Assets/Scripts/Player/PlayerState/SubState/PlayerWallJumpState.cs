@@ -15,8 +15,8 @@ public class PlayerWallJumpState : PlayerAbilityState
         //van toc dat diem cua nguoi choi 
         player.InputHandler.UseJumpInput();
         player.JumpState.ResetAmountOfJumpsLeft(); //lap lai so lan nhay
-        core.Movement.SetVelocity(playerData.wallJumpVelocity, playerData.wallJumpAngle, wallJumpDirection);
-       core.Movement.CheckIfShouldFlip(wallJumpDirection); //check doi huong 
+        Movement?.SetVelocity(playerData.wallJumpVelocity, playerData.wallJumpAngle, wallJumpDirection);
+       Movement?.CheckIfShouldFlip(wallJumpDirection); //check doi huong 
         player.JumpState.DecreaseAmountOfJumpsLeft();
     }
 
@@ -25,8 +25,8 @@ public class PlayerWallJumpState : PlayerAbilityState
         base.LogicUpdate();
 
         //Set hoat anh 
-        player.Anim.SetFloat("yVelocity", core.Movement.CurrentVelocity.y);
-        player.Anim.SetFloat("xVelocity", Mathf.Abs(core.Movement.CurrentVelocity.x));
+        player.Anim.SetFloat("yVelocity", Movement.CurrentVelocity.y);
+        player.Anim.SetFloat("xVelocity", Mathf.Abs(Movement.CurrentVelocity.x));
 
         if(Time.time >= startTime + playerData.wallJumpTime) // thoi gian nhay tuong lay tu playerData
         {
@@ -39,11 +39,11 @@ public class PlayerWallJumpState : PlayerAbilityState
     {
         if(isTouchingWall)
         {
-            wallJumpDirection = -core.Movement.FacingDirection; //khi cham tuong huong nhan vat mac dinh
+            wallJumpDirection = -Movement.FacingDirection; //khi cham tuong huong nhan vat mac dinh
         }
         else
         {
-            wallJumpDirection = core.Movement.FacingDirection; //doi huong nhan vat
+            wallJumpDirection = Movement.FacingDirection; //doi huong nhan vat
         }
     }
 }

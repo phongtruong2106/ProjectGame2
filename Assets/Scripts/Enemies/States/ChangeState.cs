@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class ChangeState : State
 {
+    protected Movement Movement{get => movement ?? Core.GetCoreComponent(ref movement);}
+ 
+    private CollisionSenses CollisionSenses{  get => collisionSenses ?? Core.GetCoreComponent(ref collisionSenses);}
+    private CollisionSenses collisionSenses;
+     private Movement movement;
     protected D_ChangeState stateData;
 
     protected bool isPlayerInMinAgroRange;
@@ -22,8 +27,8 @@ public class ChangeState : State
 
          //kiem tra go bang go thuc the 
         isPlayerInMinAgroRange = entity.checkPlayerInMinAgroRange();
-        isDetectingLedge = Core.CollisionSenses.LedgeVertical;
-        isDetectingWall = Core.CollisionSenses.WallFront;
+        isDetectingLedge = CollisionSenses.LedgeVertical;
+        isDetectingWall = CollisionSenses.WallFront;
 
 
         performCloseRangeAction = entity.CheckPlayerInCloseRangeAction();
@@ -35,7 +40,7 @@ public class ChangeState : State
 
         isChargeTimeOver = false;
         // isPlayerInMinAgroRange = entity.checkPlayerInMinAgroRange();
-        Core.Movement.SetVelocityX(stateData.chargeSpeed * Core.Movement.FacingDirection);   
+        Movement?.SetVelocityX(stateData.chargeSpeed * Movement.FacingDirection);   
     }
     public override void Exit()
     {
@@ -45,7 +50,7 @@ public class ChangeState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-         Core.Movement.SetVelocityX(stateData.chargeSpeed * Core.Movement.FacingDirection);   
+         Movement?.SetVelocityX(stateData.chargeSpeed * Movement.FacingDirection);   
 
         if(Time.time >= startTime + stateData.chargeTime)
         {

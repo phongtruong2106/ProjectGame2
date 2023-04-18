@@ -9,7 +9,13 @@ public class PlayerGroundedState : PlayerState
 
     protected bool isTouchingCeiling;
 
-    private bool JumpInput;
+    protected Movement Movement{get => movement ?? core.GetCoreComponent(ref movement);}
+ 
+    private CollisionSenses CollisionSenses{  get => collisionSenses ?? core.GetCoreComponent(ref collisionSenses);}
+    private CollisionSenses collisionSenses;
+     private Movement movement;
+
+    private bool jumpInput;
     private bool grabInput;
     private bool isGrounded;
     private bool isTouchingWall;
@@ -23,11 +29,16 @@ public class PlayerGroundedState : PlayerState
     public override void DoCheck()
     {
         base.DoCheck();
-        isGrounded = core.CollisionSenses.Ground;
-        isTouchingWall = core.CollisionSenses.WallFront;
-        isTouchingLedge = core.CollisionSenses.LedgeHorizontal;
-        //dinh nghia  cho isTouchingCeiling
-        isTouchingCeiling = core.CollisionSenses.Celling;
+
+        if(CollisionSenses)
+        {
+
+            isGrounded = CollisionSenses.Ground;
+            isTouchingWall = CollisionSenses.WallFront;
+            isTouchingLedge = CollisionSenses.LedgeHorizontal;
+            //dinh nghia  cho isTouchingCeiling
+            isTouchingCeiling = CollisionSenses.Celling;
+        }
     }
 
     public override void Enter()
@@ -50,19 +61,19 @@ public class PlayerGroundedState : PlayerState
         // dinh nghia cac phan tu
         XInput = player.InputHandler.NormInputX;
         YInput = player.InputHandler.NormInputY;
-        JumpInput = player.InputHandler.JumpInput;
+        jumpInput = player.InputHandler.JumpInput;
         grabInput = player.InputHandler.GrabInput;
         dashInput = player.InputHandler.DashInput;
 
-        if(player.InputHandler.AttackInputs[(int)CombatInput.primary]){
+        if(player.InputHandler.AttackInputs[(int)CombatInput.primary] && !isTouchingCeiling){
             stateMachine.ChangeState(player.PrimaryAttackState);
         }
-        else if(player.InputHandler.AttackInputs[(int)CombatInput.secondary])
+        else if(player.InputHandler.AttackInputs[(int)CombatInput.secondary] && !isTouchingCeiling)
         {
             stateMachine.ChangeState(player.SecondaryAttackState);
         }
         //xu ly nghiep vu logic cua ca phan tu da duoc dinh nghia
-        else if(JumpInput && player.JumpState.CanJump())
+        else if(jumpInput && player.JumpState.CanJump() && !isTouchingCeiling)
         {
             stateMachine.ChangeState(player.JumpState); //thuc hien jump chuyen trang thai nhay
         } 

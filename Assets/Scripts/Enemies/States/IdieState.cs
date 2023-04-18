@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class IdieState : State
 {
+    protected Movement Movement{get => movement ?? Core.GetCoreComponent(ref movement);}
+ 
+    private CollisionSenses CollisionSenses{  get => collisionSenses ?? Core.GetCoreComponent(ref collisionSenses);}
+    private CollisionSenses collisionSenses;
+     private Movement movement;
     protected D_IdieState stateData;
 
     protected bool flipAfterIdle;
@@ -26,7 +31,7 @@ public class IdieState : State
     public override void Enter()
     {
         base.Enter();
-        Core.Movement.SetVelocityX(0f); //cho ke thu ngungduy chuyen 
+        Movement?.SetVelocityX(0f); //cho ke thu ngungduy chuyen 
         isIdleTimeOver = false;
         SetRandomIdleTime();
     }
@@ -37,14 +42,14 @@ public class IdieState : State
 
         if(flipAfterIdle)
         {
-            Core.Movement.Flip();
+            Movement?.Flip();
         }
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        Core.Movement.SetVelocityX(0f);
+        Movement?.SetVelocityX(0f);
         if(Time.time >= startTime + idleTime)
         {
             isIdleTimeOver = true;

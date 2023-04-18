@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerDecetedState : State
 {
+    protected Movement Movement{get => movement ?? Core.GetCoreComponent(ref movement);}
+ 
+    private CollisionSenses CollisionSenses{  get => collisionSenses ?? Core.GetCoreComponent(ref collisionSenses);}
+    private CollisionSenses collisionSenses;
+     private Movement movement;
     protected D_PlayerDeceted stateData;
     protected bool isPlayerInMinArgnRange;
     protected bool isPlayerInMaxArgnRange;
@@ -21,7 +26,7 @@ public class PlayerDecetedState : State
         base.DoChecks();
         isPlayerInMinArgnRange = entity.checkPlayerInMinAgroRange();
         isPlayerInMaxArgnRange = entity.checkPlayerInMaxAgroRange();
-        isDetectingLedge = Core.CollisionSenses.LedgeVertical;
+        isDetectingLedge = CollisionSenses.LedgeVertical;
         performCloseRangeAction = entity.CheckPlayerInCloseRangeAction();
     }
 
@@ -30,7 +35,7 @@ public class PlayerDecetedState : State
         base.Enter();
 
         performLongRangeAction = false;
-        Core.Movement.SetVelocityX(0f);
+        Movement?.SetVelocityX(0f);
     }
     public override void Exit()
     {
@@ -40,7 +45,7 @@ public class PlayerDecetedState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate(); 
-        Core.Movement.SetVelocityX(0f);
+        Movement?.SetVelocityX(0f);
         //neu thoi gian co lon hon or = thoi gian bat dau + voi du lieu trang thai 
         if(Time.time >= startTime + stateData.longRangeActionTime){
                 //hanh dong tam xa

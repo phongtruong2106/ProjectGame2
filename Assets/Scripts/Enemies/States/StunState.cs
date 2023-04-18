@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class StunState : State
 {
+    protected Movement Movement{get => movement ?? Core.GetCoreComponent(ref movement);}
+ 
+    private CollisionSenses CollisionSenses{  get => collisionSenses ?? Core.GetCoreComponent(ref collisionSenses);}
+    private CollisionSenses collisionSenses;
+     private Movement movement;
     protected D_StunState stateData;
     protected bool isStunTimeOver; //dung choang
     protected bool isGrounded;
@@ -20,7 +25,7 @@ public class StunState : State
     {
         base.DoChecks();
 
-        isGrounded = Core.CollisionSenses.Ground;
+        isGrounded = CollisionSenses.Ground;
         performCloseRangeAction = entity.CheckPlayerInCloseRangeAction(); //check Player trong vung Phat hien
         isPlayerInMinAgroRange = entity.checkPlayerInMinAgroRange();
     }
@@ -31,7 +36,7 @@ public class StunState : State
         base.Enter();
         isStunTimeOver = false; //ngay luc nay se khong bi choang => viec choang se bi tam hoan
         isMovementStopted = false; //khi bat dau thi se duy chuyen binh thuong => tai day bien nay se de la false
-        Core.Movement.SetVelocity(stateData.stunKnockSpeed, stateData.stunKnockbackAngle, entity.lastDamageDirection);
+        Movement?.SetVelocity(stateData.stunKnockSpeed, stateData.stunKnockbackAngle, entity.lastDamageDirection);
     }
 
     public override void Exit()
@@ -51,7 +56,7 @@ public class StunState : State
         if(isGrounded && Time.time >= startTime + stateData.stunKnockbackTime && !isMovementStopted)
         {
             isMovementStopted = true; 
-            Core.Movement.SetVelocityX(0f);
+            Movement?.SetVelocityX(0f);
 
         }
     }

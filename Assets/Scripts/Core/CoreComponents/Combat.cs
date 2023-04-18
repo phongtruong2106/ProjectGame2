@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class Combat : CoreComponent, IDamageable, IknockBackable
 {
+    [SerializeField] private GameObject damageParticles;
+    protected Movement Movement{get => movement ?? core.GetCoreComponent(ref movement);}
+ 
+    private CollisionSenses CollisionSenses{  get => collisionSenses ?? core.GetCoreComponent(ref collisionSenses);}
+    private Stats Stats{get => stats ?? core.GetCoreComponent(ref stats);}
+    private ParticleManage ParticleManage => particleManage ? particleManage : core.GetCoreComponent(ref particleManage);
+
+    private CollisionSenses collisionSenses;
+    private Movement movement;
+    private Stats stats;
+    private ParticleManage particleManage;
     //created max knockback time 
     [SerializeField] private float maxKnockbackTime = 0.2f;
     private bool isKnockbackActive;
@@ -16,23 +27,24 @@ public class Combat : CoreComponent, IDamageable, IknockBackable
     public void Damage(float amount)
     {
         Debug.Log(core.transform.parent.name + "Damage!");
-        core.Stats.DecreaseHealth(amount);
+        Stats?.DecreaseHealth(amount);
+        ParticleManage?.StartParticlesWithRandomRotation(damageParticles);
     }
 
     public void Knockback(Vector2 angle, float strength, int direction)
     {
-        core.Movement.SetVelocity(strength, angle, direction);
-        core.Movement.CanSetVelocity = false;
+        Movement?.SetVelocity(strength, angle, direction);
+        Movement.CanSetVelocity = false;
         isKnockbackActive = true;
         knockbackStartTime = Time.time;
     }
 
     private void CheckKnockback()
     {
-        if(isKnockbackActive && ((core.Movement.CurrentVelocity.y <= 0.01f && core.CollisionSenses.Ground) || Time.time >=maxKnockbackTime))
+        if(isKnockbackActive && ((Movement?.CurrentVelocity.y <= 0.01f && CollisionSenses.Ground) || Time.time >=maxKnockbackTime))
         {
             isKnockbackActive = false;
-            core.Movement.CanSetVelocity = true;
+            Movement.CanSetVelocity = true;
         }
     }
 }
