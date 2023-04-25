@@ -24,18 +24,19 @@ public class GameManager : MonoBehaviour
     private void Update() {
         CheckRespawn();
     }
-    public void Respawn(){
-        //thoi gian hoi sinh bat dau bang voi thoi gian trong game
-        respawnTimeStart = Time.time;
-        respawn = true;
+   public void Respawn(){
+    //thoi gian hoi sinh bat dau bang voi thoi gian trong game
+    respawnTimeStart = Time.time;
+    respawn = true;
     }
 
     private void CheckRespawn()
     {
         //neu thoi gian lon hon hoac bang thoi gian hoi sinh bat dau  + voi thoi gian hoi sinh
-        if(Time.time >= respawnTimeStart + respawnTime && respawn)
+       if(Time.time >= respawnTimeStart + respawnTime && respawn)
         {
             var playerTemp =  Instantiate(player, respawnPoint);
+            playerTemp.transform.position = respawnPoint.position; // di chuyển player tới respawnPoint
             CVC.m_Follow = playerTemp.transform;
             respawn = false;
         }

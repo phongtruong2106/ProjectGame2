@@ -34,4 +34,9 @@ public class Stats : CoreComponent
     {
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
     }
+
+    public void Reset()
+    {
+        currentHealth = maxHealth;
+    }
 }

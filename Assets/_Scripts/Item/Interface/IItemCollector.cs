@@ -3,5 +3,5 @@ using UnityEngine;
 
 public interface IItemCollector
 {  
-    void OnTriggerEnter2D(Collider2D collision);
+    void OnTriggerStay2D(Collider2D collision);
 }
