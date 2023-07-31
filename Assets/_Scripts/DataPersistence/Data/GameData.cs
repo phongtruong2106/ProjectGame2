@@ -6,6 +6,9 @@ using UnityEngine;
 public class GameData
 {
     public int deadCount;
+    public Vector3 playerPosition;
+
+    public SerializableDictionary<string, bool> coinsCollected;
 
 
     //the values  define in this constructor will be default values
@@ -14,5 +17,7 @@ public class GameData
     public GameData()
     {
         this.deadCount = 0;
+        playerPosition =  Vector3.zero;
+        coinsCollected = new SerializableDictionary<string, bool>();
     }
 }

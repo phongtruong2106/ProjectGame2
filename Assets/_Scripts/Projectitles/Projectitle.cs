@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Projectitle : MonoBehaviour
 {
-    // private AttackDetails attackDetails;
+    private AttackDetail attackDetails;
+    protected D_RangeAttaclState stateData;
 
     private float speed;
     private float travelDistance;
@@ -15,6 +16,7 @@ public class Projectitle : MonoBehaviour
     private float gravity;
     [SerializeField]
     private float damageRadius;
+    [SerializeField]
 
     private Rigidbody2D rb;
     private bool isGravityOn;
@@ -41,7 +43,7 @@ public class Projectitle : MonoBehaviour
     private void Update() {
         if(!hasHitGround)
         {
-            // attackDetails.position = transform.position;
+            attackDetails.position = transform.position;
 
             if(isGravityOn)
             {
@@ -59,7 +61,12 @@ public class Projectitle : MonoBehaviour
 
             if(damageHit)
             {
-                // damageHit.transform.SendMessage("Damage", attackDetails);
+                IDamageable damageable = damageHit.GetComponent<IDamageable>();
+                if (damageable != null)
+                {
+                    damageable.Damage(attackDetails.damageAmount);
+                }
+                Debug.Log("Attack +1");
                 Destroy(gameObject);
             }
             if(groundHit)
@@ -79,9 +86,11 @@ public class Projectitle : MonoBehaviour
 
     public void FireProjectile(float speed, float travelDistance, float damage)
     {
+
         this.speed = speed;
         this.travelDistance = travelDistance;
-        // attackDetails.damageAmount = damage;
+        attackDetails.damageAmount = damage;
+        Debug.Log("damage 1" + damage);
     }
 
     private void OnDrawGizmos() {

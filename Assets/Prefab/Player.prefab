@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2820951433994567714
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3488395735072703945}
+  - component: {fileID: 4894499857012594025}
+  m_Layer: 11
+  m_Name: Positision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3488395735072703945
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2820951433994567714}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5811682987384658615}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4894499857012594025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2820951433994567714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3271d3f0a933bd4aba80335f06242af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5811682986747046801
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,6 +452,7 @@ Transform:
   - {fileID: 5811682988071335082}
   - {fileID: 5811682986797308078}
   - {fileID: 5811682987926050149}
+  - {fileID: 3488395735072703945}
   m_Father: {fileID: 5811682988706619478}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -872,7 +917,6 @@ GameObject:
   - component: {fileID: 5811682988706619472}
   - component: {fileID: 5811682988706619475}
   - component: {fileID: 5811682988706619470}
-  - component: {fileID: 5811682988706619471}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -1200,21 +1244,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapons:
   - {fileID: 5811682988562951802}
---- !u!114 &5811682988706619471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5811682988706619481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07e548c018c4e7247988aaaec65fec04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item_Default: 9
-  Item_Text: {fileID: 0}
-  Item_Default_Text: {fileID: 0}
 --- !u!1 &5811682988739953083
 GameObject:
   m_ObjectHideFlags: 0

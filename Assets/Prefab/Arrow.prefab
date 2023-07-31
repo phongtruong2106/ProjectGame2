@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: 3
-  damageRadius: 0.03
+  damageRadius: 0.1
   whatisGround:
     serializedVersion: 2
     m_Bits: 256

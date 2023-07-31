@@ -3,7 +3,21 @@ guid: 009b0da4b023d1e4bba4f40cde9940d6
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - entityData: {fileID: 11400000, guid: 5e23775e88a8f8846b27aa125ede897e, type: 2}
+  - wallCheck: {instanceID: 0}
+  - ledgeCheck: {instanceID: 0}
+  - playerCheck: {instanceID: 0}
+  - groundCheck: {instanceID: 0}
+  - idieStateData: {fileID: 11400000, guid: c533c8a9dcff673488f2120a5f02dfbb, type: 2}
+  - moveStateData: {fileID: 11400000, guid: 974ff3baa400baa41ae34665b3c4902d, type: 2}
+  - playerDecetedData: {fileID: 11400000, guid: c8d2a8219a2229f4a9c265c27f8aae11, type: 2}
+  - chargeStateData: {fileID: 11400000, guid: f39666496e8865843a9adc7db5659d42, type: 2}
+  - lookForPlayerData: {fileID: 11400000, guid: 20783c9b6a6404c489b94404dcdda200, type: 2}
+  - meleeAttackStateData: {fileID: 11400000, guid: 3acbd0ed7f6657a4a856e169e9331407, type: 2}
+  - stunStateData: {fileID: 11400000, guid: 37343913d2c0f1a41a84687972b8f513, type: 2}
+  - deadStateData: {fileID: 11400000, guid: 0d279a2c492bb00449a623c46f2dfe6e, type: 2}
+  - meleeAttackPosition: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

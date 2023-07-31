@@ -68,10 +68,6 @@ public class PlayerGroundedState : PlayerState
         if(player.InputHandler.AttackInputs[(int)CombatInput.primary] && !isTouchingCeiling){
             stateMachine.ChangeState(player.PrimaryAttackState);
         }
-        else if(player.InputHandler.AttackInputs[(int)CombatInput.secondary] && !isTouchingCeiling)
-        {
-            stateMachine.ChangeState(player.SecondaryAttackState);
-        }
         //xu ly nghiep vu logic cua ca phan tu da duoc dinh nghia
         else if(jumpInput && player.JumpState.CanJump() && !isTouchingCeiling)
         {

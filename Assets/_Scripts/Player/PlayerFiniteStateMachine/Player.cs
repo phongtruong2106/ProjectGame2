@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
             CrouchIdleState = new PlayerCrouchIdleState(this, StateMachine, playerData, "crouchIdle");
             CrouchMoveState = new PlayerCrouchMoveState(this, StateMachine, playerData, "crouchMove");
             PrimaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack");
-            SecondaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack");
+            
         }
 
         private void Start() {

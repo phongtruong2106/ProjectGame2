@@ -1,9 +1,11 @@
 
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemCollector : MonoBehaviour, IItemCollector
 {
+    private IItem iitem{get; set;}
     private int item = 0;
     [SerializeField] private int item_Default = 5;
     [SerializeField] private Text Item_Text;
@@ -22,6 +24,7 @@ public class ItemCollector : MonoBehaviour, IItemCollector
         }
     }
 
+
     public void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("item"))
@@ -35,4 +38,6 @@ public class ItemCollector : MonoBehaviour, IItemCollector
             }
         }
     }
+
+ 
 }

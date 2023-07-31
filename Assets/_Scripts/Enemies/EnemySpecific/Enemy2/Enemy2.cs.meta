@@ -3,7 +3,23 @@ guid: afadca38cd568bf408f85e36f21b3ccb
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - entityData: {fileID: 11400000, guid: 5fb61a29042b6f743b4491d83542c127, type: 2}
+  - wallCheck: {instanceID: 0}
+  - ledgeCheck: {instanceID: 0}
+  - playerCheck: {instanceID: 0}
+  - groundCheck: {instanceID: 0}
+  - moveStateData: {fileID: 11400000, guid: 5eda9fb98e84b2c488ec196326c68636, type: 2}
+  - idleStateData: {fileID: 11400000, guid: fdd118aa7013d3646b938b8df7481785, type: 2}
+  - playerDetectesStateData: {fileID: 11400000, guid: 4bbcd4a4a4d4a7646b8ccc1a821ea7c4, type: 2}
+  - meleeAttackStateData: {fileID: 11400000, guid: 9d3281df64646ae4bb54d813efd20308, type: 2}
+  - lookForPlayerStateData: {fileID: 11400000, guid: 9f21bf0bd69031d4b8d6b2af2dd67b11, type: 2}
+  - stunStateData: {fileID: 11400000, guid: cd61f0a25a3b0aa4886601dafe6364fe, type: 2}
+  - deadStateData: {fileID: 11400000, guid: 33940f9c61195554bbe8b633d1fb0527, type: 2}
+  - dodgeStateData: {fileID: 11400000, guid: 9bd3dc42b4b855a4e9e479b546a3d57f, type: 2}
+  - rangeAttaclStateData: {fileID: 11400000, guid: ac2920a8dae914645b70902c0e3c73cb, type: 2}
+  - meleeAttackPosition: {instanceID: 0}
+  - rangedAttackPosition: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

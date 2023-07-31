@@ -10,6 +10,14 @@ public class Stats : CoreComponent
     [SerializeField] private float maxHealth;
     private float currentHealth;
 
+    private HealthBar healthBarr => healthBar ? healthBar : core.GetCoreComponent(ref healthBar);
+    private HealthBar healthBar;
+
+    private void Start() {
+        healthBar = GameObject.Find("Health bar").GetComponent<HealthBar>();
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+    }
     protected override void Awake()
     {
         base.Awake();
@@ -19,6 +27,7 @@ public class Stats : CoreComponent
     public void DecreaseHealth(float amount)
     {
         currentHealth -= amount;
+        healthBar.SetHealth(currentHealth);
 
         if(currentHealth <= 0)
         {
@@ -38,5 +47,6 @@ public class Stats : CoreComponent
     public void Reset()
     {
         currentHealth = maxHealth;
+        healthBar.SetHealth(currentHealth);
     }
 }

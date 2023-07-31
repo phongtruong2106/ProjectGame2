@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RangeAttackState : AttackState
-{
+{   
+    protected AttackDetail attackDetail;
     protected D_RangeAttaclState stateData;
     protected GameObject projectile;
     protected Projectitle projectitleScript;
@@ -20,6 +21,7 @@ public class RangeAttackState : AttackState
     public override void Enter()
     {
         base.Enter();
+        attackDetail.damageAmount  = stateData.projectileDamage;
     }
 
     public override void Exit()
@@ -44,9 +46,9 @@ public class RangeAttackState : AttackState
     public override void TriggerAttack()
     {
         base.TriggerAttack();
-
         projectile =  GameObject.Instantiate(stateData.projectile, attackPosition.position, attackPosition.rotation);
         projectitleScript = projectile.GetComponent<Projectitle>();
         projectitleScript.FireProjectile(stateData.projectileSpeed, stateData.projectitleTravelDistance, stateData.projectileDamage);
+        Debug.Log(stateData.projectileDamage);
     }
 }
